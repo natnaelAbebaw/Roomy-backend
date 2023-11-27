@@ -1,0 +1,201 @@
+[
+  {
+    "cabinName": "Cozy Retreat",
+    "cabinType": "Deluxe Suite",
+    "images": [
+      "https://example.com/image1.jpg",
+      "https://example.com/image2.jpg",
+      "https://example.com/image3.jpg"
+    ],
+    "floor": "2nd Floor",
+    "maxCapacity": 2,
+    "regularPrice": 150,
+    "discount": 10,
+    "availability": true,
+    "amenities": [
+      "Free Wi-Fi",
+      "Air Conditioning",
+      "Mini Bar",
+      "Private Balcony"
+    ],
+    "bedConfigurations": ["King Bed"],
+    "description": "Experience luxury and comfort in our Deluxe Suite with a stunning view.",
+    "viewType": "Mountain View",
+    "hotelId": "60c8d01c156ae40d5c62b41a"
+  },
+  {
+    "cabinName": "Family Oasis",
+    "cabinType": "Family Cabin",
+    "images": [
+      "https://example.com/image4.jpg",
+      "https://example.com/image5.jpg",
+      "https://example.com/image6.jpg"
+    ],
+    "floor": "1st Floor",
+    "maxCapacity": 4,
+    "regularPrice": 200,
+    "discount": 15,
+    "availability": true,
+    "amenities": ["Free Wi-Fi", "Kitchenette", "Pet-Friendly"],
+    "bedConfigurations": ["Queen Bed", "Twin Beds"],
+    "description": "Perfect for families, our Family Cabin offers a spacious and comfortable stay.",
+    "viewType": "Lake View",
+    "hotelId": "60c8d01c156ae40d5c62b41b"
+  },
+  {
+    "cabinName": "Romantic Hideaway",
+    "cabinType": "Honeymoon Suite",
+    "images": [
+      "https://example.com/image7.jpg",
+      "https://example.com/image8.jpg",
+      "https://example.com/image9.jpg"
+    ],
+    "floor": "3rd Floor",
+    "maxCapacity": 2,
+    "regularPrice": 180,
+    "discount": 12,
+    "availability": true,
+    "amenities": ["Free Wi-Fi", "Jacuzzi", "Private Deck"],
+    "bedConfigurations": ["King Bed"],
+    "description": "Indulge in a romantic escape in our Honeymoon Suite with intimate amenities.",
+    "viewType": "Ocean View",
+    "hotelId": "60c8d01c156ae40d5c62b41c"
+  },
+  {
+    "cabinName": "Rustic Charm",
+    "cabinType": "Log Cabin",
+    "images": [
+      "https://example.com/image10.jpg",
+      "https://example.com/image11.jpg",
+      "https://example.com/image12.jpg"
+    ],
+    "floor": "Ground Floor",
+    "maxCapacity": 3,
+    "regularPrice": 120,
+    "discount": 8,
+    "availability": true,
+    "amenities": ["Fireplace", "Forest View", "Outdoor Seating"],
+    "bedConfiguration": ["Double Bed", "Single Bed"],
+    "description": "Experience the charm of a rustic log cabin surrounded by nature.",
+    "viewType": "Forest View",
+    "hotelId": "60c8d01c156ae40d5c62b41d"
+  },
+  {
+    "cabinName": "Urban Getaway",
+    "cabinType": "City Loft",
+    "images": [
+      "https://example.com/image13.jpg",
+      "https://example.com/image14.jpg",
+      "https://example.com/image15.jpg"
+    ],
+    "floor": "4th Floor",
+    "maxCapacity": 2,
+    "regularPrice": 160,
+    "discount": 10,
+    "availability": true,
+    "amenities": ["Downtown Location", "Modern Decor", "Roof Terrace"],
+    "bedConfigurations": ["Queen Bed"],
+    "description": "Escape to an urban oasis with our stylish City Loft.",
+    "viewType": "City View",
+    "hotelId": "60c8d01c156ae40d5c62b41e"
+  },
+  {
+    "cabinName": "Serenity Suite",
+    "cabinType": "Spa Retreat",
+    "images": [
+      "https://example.com/image16.jpg",
+      "https://example.com/image17.jpg",
+      "https://example.com/image18.jpg"
+    ],
+    "floor": "2nd Floor",
+    "maxCapacity": 2,
+    "regularPrice": 200,
+    "discount": 15,
+    "availability": true,
+    "amenities": ["Private Spa", "Panoramic Windows", "Relaxation Lounge"],
+    "bedConfigurations": ["King Bed"],
+    "description": "Indulge in tranquility with our Spa Retreat, complete with a private spa.",
+    "viewType": "Mountain View",
+    "hotelId": "60c8d01c156ae40d5c62b41f"
+  },
+  {
+    "cabinName": "Skyline Penthouse",
+    "cabinType": "Luxury Penthouse",
+    "images": [
+      "https://example.com/image19.jpg",
+      "https://example.com/image20.jpg",
+      "https://example.com/image21.jpg"
+    ],
+    "floor": "Top Floor",
+    "maxCapacity": 4,
+    "regularPrice": 350,
+    "discount": 20,
+    "availability": true,
+    "amenities": [
+      "Exclusive Elevator Access",
+      "Skyline Views",
+      "Private Terrace"
+    ],
+    "bedConfigurations": ["King Bed", "Queen Bed"],
+    "description": "Elevate your stay with our luxurious Skyline Penthouse.",
+    "viewType": "City View",
+    "hotelId": "60c8d01c156ae40d5c62b420"
+  },
+  {
+    "cabinName": "Seaside Cottage",
+    "cabinType": "Beachfront Cottage",
+    "images": [
+      "https://example.com/image22.jpg",
+      "https://example.com/image23.jpg",
+      "https://example.com/image24.jpg"
+    ],
+    "floor": "Ground Floor",
+    "maxCapacity": 2,
+    "regularPrice": 180,
+    "discount": 12,
+    "availability": true,
+    "amenities": ["Direct Beach Access", "Sunset Views", "Private Patio"],
+    "bedConfigurations": ["Queen Bed"],
+    "description": "Experience coastal charm in our charming Seaside Cottage.",
+    "viewType": "Ocean View",
+    "hotelId": "60c8d01c156ae40d5c62b421"
+  },
+  {
+    "cabinName": "Alpine Lodge",
+    "cabinType": "Mountain Lodge",
+    "images": [
+      "https://example.com/image25.jpg",
+      "https://example.com/image26.jpg",
+      "https://example.com/image27.jpg"
+    ],
+    "floor": "1st Floor",
+    "maxCapacity": 6,
+    "regularPrice": 250,
+    "discount": 15,
+    "availability": true,
+    "amenities": ["Ski-In/Ski-Out", "Fireplace", "Hot Tub"],
+    "bedConfigurations": ["Queen Bed", "Bunk Beds"],
+    "description": "Embrace the mountain experience in our cozy Alpine Lodge.",
+    "viewType": "Mountain View",
+    "hotelId": "60c8d01c156ae40d5c62b422"
+  },
+  {
+    "cabinName": "Eco-Friendly Haven",
+    "cabinType": "Green Suite",
+    "images": [
+      "https://example.com/image28.jpg",
+      "https://example.com/image29.jpg",
+      "https://example.com/image30.jpg"
+    ],
+    "floor": "3rd Floor",
+    "maxCapacity": 2,
+    "regularPrice": 170,
+    "discount": 10,
+    "availability": true,
+    "amenities": ["Solar Power", "Rainwater Harvesting", "Organic Bedding"],
+    "bedConfigurations": ["King Bed"],
+    "description": "Experience sustainability in our eco-friendly Green Suite.",
+    "viewType": "Garden View",
+    "hotelId": "60c8d01c156ae40d5c62b423"
+  }
+]
