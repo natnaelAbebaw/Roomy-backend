@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import "./controllers/cabinControllers";
+import "./controllers/index";
+
 import App from "./app";
 // import { dataUloader } from "./sampleData/dataUploader";
 
@@ -16,6 +17,7 @@ const db = mongoose.connect(cloudUrl);
 
 db.then(() => {
   console.log("mongodb connect sucessfully!");
+  // dataUloader()
 });
 
 App.listen(port, () => {

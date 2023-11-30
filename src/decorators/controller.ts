@@ -1,10 +1,10 @@
-import { MaxKey } from "mongodb";
+import { get } from "mongoose";
 import { metadataKeys } from "./metadataKeys";
 import { methods } from "./methods";
-import express from "express";
-export const router = express.Router();
+import express, { NextFunction, Request, Response } from "express";
+
 export function controller(rootPath: string) {
-  return function (target: Function) {
+  return function (target: any) {
     for (let key of Object.getOwnPropertyNames(target.prototype)) {
       const method: methods = Reflect.getMetadata(
         metadataKeys.method,
@@ -13,8 +13,22 @@ export function controller(rootPath: string) {
       );
       const path =
         Reflect.getMetadata(metadataKeys.path, target.prototype, key) || "";
-      if (method)
-        router.route(`${rootPath}${path}`)[method](target.prototype[key]);
+      async function routerHander(
+        req: Request,
+        res: Response,
+        next: NextFunction
+      ) {
+        try {
+          const fuc = await target.prototype[key]();
+          await fuc(req, res, next);
+        } catch (err) {
+          next(err);
+        }
+      }
+      const router = target.getRouter();
+
+      if (method) router.route(`${rootPath}${path}`)[method](routerHander);
     }
   };
+
 }

@@ -1,9 +1,9 @@
 import fs from "fs";
-import { CabinModel } from "../models/cabinModel";
+import { HotelModel } from "../models/hotelModel";
 
 export function dataUloader() {
-  const cabins = fs.readFileSync("./src/sampleData/cabinData.json", "utf-8");
-  CabinModel.create(JSON.parse(cabins))
+  const hotels = fs.readFileSync("./src/sampleData/hotelData.json", "utf-8");
+  HotelModel.create(JSON.parse(hotels))
     .then(() => console.log("uploaded successfully"))
     .catch((err) => console.error(err));
 }

@@ -1,0 +1,268 @@
+[
+  {
+    "name": "Oceanfront Haven Resort",
+    "location": {
+      "city": "Seascape",
+      "state": "Coastal",
+      "country": "USA",
+      "zipcode": "12345",
+      "coords": {
+        "lat": "34.0522",
+        "long": "-118.2437"
+      }
+    },
+    "contacts": {
+      "email": "info@oceanfronthavenresort.com",
+      "phone": "+1 (555) 123-4567",
+      "website": "www.oceanfronthavenresort.com"
+    },
+    "address": "123 Shoreline Drive",
+    "description": "Escape to a haven of luxury with breathtaking oceanfront views.",
+    "rating": 4.7,
+    "images": ["image71.jpg", "image72.jpg", "image73.jpg"],
+    "facilities": ["Private Beach Access", "Infinity Pool", "Beachside Dining"],
+    "roomTypes": ["Ocean View Suite", "Beachfront Villa", "Standard Room"],
+    "roomCount": 50,
+    "priceRange": { "min": 200, "max": 600 },
+    "cancellationPolicy": "Free cancellation up to 72 hours before check-in",
+    "additionalPolicies": ["No smoking in rooms", "Children under 12 stay free"]
+  },
+  {
+    "name": "Skyline View Hotel",
+    "location": {
+      "city": "Metropolis",
+      "state": "Urban",
+      "country": "USA",
+      "zipcode": "54321",
+      "coords": {
+        "lat": "40.7128",
+        "long": "-74.0060"
+      }
+    },
+    "contacts": {
+      "email": "info@skylineviewhotel.com",
+      "phone": "+1 (555) 987-6543",
+      "website": "www.skylineviewhotel.com"
+    },
+    "address": "789 Highrise Avenue",
+    "description": "Enjoy breathtaking skyline views from the comfort of your room.",
+    "rating": 4.4,
+    "images": ["image61.jpg", "image62.jpg", "image63.jpg"],
+    "facilities": ["Rooftop Bar", "Conference Rooms", "Fitness Center"],
+    "roomTypes": [
+      "City View Suite",
+      "Executive Room",
+      "Standard Accommodation"
+    ],
+    "roomCount": 70,
+    "priceRange": { "min": 150, "max": 450 },
+    "cancellationPolicy": "Free cancellation up to 48 hours before check-in",
+    "additionalPolicies": ["No pets allowed", "Valet parking available"]
+  },
+  {
+    "name": "Zen Garden Resort",
+    "location": {
+      "city": "Tranquilville",
+      "state": "Peaceful",
+      "country": "Japan",
+      "zipcode": "123-4567",
+      "coords": {
+        "lat": "35.6895",
+        "long": "139.6917"
+      }
+    },
+    "contacts": {
+      "email": "info@zengardenresort.jp",
+      "phone": "+81 123-456-7890",
+      "website": "www.zengardenresort.jp"
+    },
+    "address": "456 Serenity Lane",
+    "description": "Experience tranquility amidst beautiful Zen gardens and traditional architecture.",
+    "rating": 4.6,
+    "images": ["image51.jpg", "image52.jpg", "image53.jpg"],
+    "facilities": ["Japanese Tea House", "Meditation Pavilion", "Onsen Spa"],
+    "roomTypes": ["Ryokan Suite", "Zen Garden View Room", "Tatami Mat Retreat"],
+    "roomCount": 35,
+    "priceRange": { "min": 200, "max": 600 },
+    "cancellationPolicy": "Free cancellation up to 72 hours before check-in",
+    "additionalPolicies": ["No shoes indoors", "Silence in common areas"]
+  },
+  {
+    "name": "Historic Elegance Inn",
+    "location": {
+      "city": "Old Town",
+      "state": "Historic",
+      "country": "USA",
+      "zipcode": "98765",
+      "coords": {
+        "lat": "37.7749",
+        "long": "-122.4194"
+      }
+    },
+    "contacts": {
+      "email": "info@historicinn.com",
+      "phone": "+1 (555) 876-5432",
+      "website": "www.historiceleganceinn.com"
+    },
+    "address": "789 Heritage Street",
+    "description": "Step into the charm of a bygone era at the Historic Elegance Inn.",
+    "rating": 4.5,
+    "images": ["image41.jpg", "image42.jpg", "image43.jpg"],
+    "facilities": [
+      "Antique Furnishings",
+      "Tea Room",
+      "Guided Historical Tours"
+    ],
+    "roomTypes": ["Victorian Suite", "Colonial Room", "Presidential Apartment"],
+    "roomCount": 20,
+    "priceRange": { "min": 120, "max": 400 },
+    "cancellationPolicy": "Free cancellation up to 48 hours before check-in",
+    "additionalPolicies": ["No smoking indoors", "Adults only"]
+  },
+  {
+    "name": "Tropical Paradise Resort",
+    "location": {
+      "city": "Palm Beach",
+      "state": "Island",
+      "country": "Maldives",
+      "zipcode": "MV123",
+      "coords": {
+        "lat": "3.2028",
+        "long": "73.2207"
+      }
+    },
+    "contacts": {
+      "email": "info@tropicalparadiseresort.com",
+      "phone": "+960 1234567",
+      "website": "www.tropicalparadiseresort.com"
+    },
+    "address": "45 Seaside Avenue",
+    "description": "Escape to a tropical haven with pristine beaches and clear waters.",
+    "rating": 4.7,
+    "images": ["image31.jpg", "image32.jpg", "image33.jpg"],
+    "facilities": ["Overwater Bungalows", "Dive Center", "Beachfront Dining"],
+    "roomTypes": ["Beach Villa", "Water Villa", "Presidential Suite"],
+    "roomCount": 25,
+    "priceRange": { "min": 300, "max": 1200 },
+    "cancellationPolicy": "Free cancellation up to 72 hours before check-in",
+    "additionalPolicies": [
+      "All-inclusive packages available",
+      "No smoking in enclosed areas"
+    ]
+  },
+  {
+    "name": "Regal Palace Hotel",
+    "location": {
+      "city": "Royaltyville",
+      "state": "Monarchy",
+      "country": "UK",
+      "zipcode": "SW1A 1AA",
+      "coords": {
+        "lat": "51.5074",
+        "long": "-0.1278"
+      }
+    },
+    "contacts": {
+      "email": "info@regalpalacehotel.co.uk",
+      "phone": "+44 20 1234 5678",
+      "website": "www.regalpalacehotel.co.uk"
+    },
+    "address": "1 Royal Street",
+    "description": "Indulge in luxury fit for royalty at the Regal Palace Hotel.",
+    "rating": 4.9,
+    "images": ["image21.jpg", "image22.jpg", "image23.jpg"],
+    "facilities": ["Royal Dining", "Ballroom Events", "Private Gardens"],
+    "roomTypes": ["Royal Suite", "Executive Room", "Classic Chamber"],
+    "roomCount": 60,
+    "priceRange": { "min": 200, "max": 800 },
+    "cancellationPolicy": "Free cancellation up to 48 hours before check-in",
+    "additionalPolicies": [
+      "Formal attire required for dining",
+      "No pets allowed"
+    ]
+  },
+  {
+    "name": "Mountain Lodge Retreat",
+    "location": {
+      "city": "Alpine Village",
+      "state": "Mountainous",
+      "country": "Canada",
+      "zipcode": "V8V 3V4",
+      "coords": {
+        "lat": "48.4284",
+        "long": "-123.3656"
+      }
+    },
+    "contacts": {
+      "email": "info@mountainlodgeretreat.com",
+      "phone": "+1 (555) 876-5432",
+      "website": "www.mountainlodgeretreat.com"
+    },
+    "address": "789 Mountain Trail",
+    "description": "Experience serenity surrounded by majestic mountain views.",
+    "rating": 4.6,
+    "images": ["image14.jpg", "image15.jpg", "image16.jpg"],
+    "facilities": ["Hiking Trails", "Fireplace Lounge", "Spa"],
+    "roomTypes": ["Mountain View Suite", "Cozy Cabin", "Standard Lodge Room"],
+    "roomCount": 40,
+    "priceRange": { "min": 120, "max": 450 },
+    "cancellationPolicy": "Free cancellation up to 72 hours before check-in",
+    "additionalPolicies": ["No smoking", "Pet-friendly accommodation available"]
+  },
+  {
+    "name": "Seaside Paradise Resort",
+    "location": {
+      "city": "Coastal Haven",
+      "state": "Littoral",
+      "country": "USA",
+      "zipcode": "54321",
+      "coords": {
+        "lat": "34.0522",
+        "long": "-118.2437"
+      }
+    },
+    "contacts": {
+      "email": "info@seasideparadiseresort.com",
+      "phone": "+1 (555) 987-6543",
+      "website": "www.seasideparadiseresort.com"
+    },
+    "address": "456 Oceanfront Drive",
+    "description": "Relax and enjoy breathtaking sunset views from our resort.",
+    "rating": 4.5,
+    "images": ["image4.jpg", "image5.jpg", "image6.jpg"],
+    "facilities": ["Beach Access", "Poolside Bar", "Water Sports"],
+    "roomTypes": ["Beachfront Villa", "Ocean View Room", "Standard Cottage"],
+    "roomCount": 30,
+    "priceRange": { "min": 120, "max": 400 },
+    "cancellationPolicy": "Free cancellation up to 72 hours before check-in",
+    "additionalPolicies": ["No smoking", "Children under 12 stay free"]
+  },
+  {
+    "name": "Luxury Retreat Hotel",
+    "location": {
+      "city": "Metropolis",
+      "state": "Capital",
+      "country": "Wonderland",
+      "zipcode": "12345",
+      "coords": {
+        "lat": "40.7128",
+        "long": "-74.0060"
+      }
+    },
+    "contacts": {
+      "email": "info@luxuryretreathotel.com",
+      "phone": "+1 (555) 123-4567",
+      "website": "www.luxuryretreathotel.com"
+    },
+    "address": "123 Serenity Lane",
+    "description": "Experience the epitome of luxury at our exclusive retreat.",
+    "rating": 4.8,
+    "images": ["image1.jpg", "image2.jpg", "image3.jpg"],
+    "facilities": ["Pool", "Spa", "Gym", "Fine Dining"],
+    "roomTypes": ["Deluxe Suite", "Executive Room", "Standard Room"],
+    "roomCount": 50,
+    "priceRange": { "min": 150, "max": 500 },
+    "cancellationPolicy": "Free cancellation up to 48 hours before check-in",
+    "additionalPolicies": ["No pets allowed", "No smoking"]
+  }
+]
