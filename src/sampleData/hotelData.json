@@ -1,268 +1,513 @@
 [
   {
-    "name": "Oceanfront Haven Resort",
+    "name": "Mountain Retreat Hotel",
     "location": {
-      "city": "Seascape",
-      "state": "Coastal",
+      "city": "Aspen",
+      "state": "Colorado",
       "country": "USA",
-      "zipcode": "12345",
+      "zipcode": "81611",
       "coords": {
-        "lat": "34.0522",
-        "long": "-118.2437"
+        "lat": "39.1911",
+        "long": "-106.8175"
       }
     },
     "contacts": {
-      "email": "info@oceanfronthavenresort.com",
-      "phone": "+1 (555) 123-4567",
-      "website": "www.oceanfronthavenresort.com"
+      "email": "info@mountainretreathotel.com",
+      "phone": "+1 555-1234",
+      "website": "www.mountainretreathotel.com"
     },
-    "address": "123 Shoreline Drive",
-    "description": "Escape to a haven of luxury with breathtaking oceanfront views.",
-    "rating": 4.7,
-    "images": ["image71.jpg", "image72.jpg", "image73.jpg"],
-    "facilities": ["Private Beach Access", "Infinity Pool", "Beachside Dining"],
-    "roomTypes": ["Ocean View Suite", "Beachfront Villa", "Standard Room"],
-    "roomCount": 50,
-    "priceRange": { "min": 200, "max": 600 },
-    "cancellationPolicy": "Free cancellation up to 72 hours before check-in",
-    "additionalPolicies": ["No smoking in rooms", "Children under 12 stay free"]
-  },
-  {
-    "name": "Skyline View Hotel",
-    "location": {
-      "city": "Metropolis",
-      "state": "Urban",
-      "country": "USA",
-      "zipcode": "54321",
-      "coords": {
-        "lat": "40.7128",
-        "long": "-74.0060"
-      }
-    },
-    "contacts": {
-      "email": "info@skylineviewhotel.com",
-      "phone": "+1 (555) 987-6543",
-      "website": "www.skylineviewhotel.com"
-    },
-    "address": "789 Highrise Avenue",
-    "description": "Enjoy breathtaking skyline views from the comfort of your room.",
-    "rating": 4.4,
-    "images": ["image61.jpg", "image62.jpg", "image63.jpg"],
-    "facilities": ["Rooftop Bar", "Conference Rooms", "Fitness Center"],
-    "roomTypes": [
-      "City View Suite",
-      "Executive Room",
-      "Standard Accommodation"
-    ],
-    "roomCount": 70,
-    "priceRange": { "min": 150, "max": 450 },
-    "cancellationPolicy": "Free cancellation up to 48 hours before check-in",
-    "additionalPolicies": ["No pets allowed", "Valet parking available"]
-  },
-  {
-    "name": "Zen Garden Resort",
-    "location": {
-      "city": "Tranquilville",
-      "state": "Peaceful",
-      "country": "Japan",
-      "zipcode": "123-4567",
-      "coords": {
-        "lat": "35.6895",
-        "long": "139.6917"
-      }
-    },
-    "contacts": {
-      "email": "info@zengardenresort.jp",
-      "phone": "+81 123-456-7890",
-      "website": "www.zengardenresort.jp"
-    },
-    "address": "456 Serenity Lane",
-    "description": "Experience tranquility amidst beautiful Zen gardens and traditional architecture.",
-    "rating": 4.6,
-    "images": ["image51.jpg", "image52.jpg", "image53.jpg"],
-    "facilities": ["Japanese Tea House", "Meditation Pavilion", "Onsen Spa"],
-    "roomTypes": ["Ryokan Suite", "Zen Garden View Room", "Tatami Mat Retreat"],
-    "roomCount": 35,
-    "priceRange": { "min": 200, "max": 600 },
-    "cancellationPolicy": "Free cancellation up to 72 hours before check-in",
-    "additionalPolicies": ["No shoes indoors", "Silence in common areas"]
-  },
-  {
-    "name": "Historic Elegance Inn",
-    "location": {
-      "city": "Old Town",
-      "state": "Historic",
-      "country": "USA",
-      "zipcode": "98765",
-      "coords": {
-        "lat": "37.7749",
-        "long": "-122.4194"
-      }
-    },
-    "contacts": {
-      "email": "info@historicinn.com",
-      "phone": "+1 (555) 876-5432",
-      "website": "www.historiceleganceinn.com"
-    },
-    "address": "789 Heritage Street",
-    "description": "Step into the charm of a bygone era at the Historic Elegance Inn.",
+    "address": "123 Mountain Avenue, Aspen, CO 81611, USA",
     "rating": 4.5,
-    "images": ["image41.jpg", "image42.jpg", "image43.jpg"],
+    "regularPrice": 200,
+    "discount": 20,
+    "images": ["image1.jpg", "image2.jpg"],
     "facilities": [
-      "Antique Furnishings",
-      "Tea Room",
-      "Guided Historical Tours"
+      "Free Wi-Fi",
+      "Spa",
+      "Fitness Center",
+      "Restaurant",
+      "Swimming Pool"
     ],
-    "roomTypes": ["Victorian Suite", "Colonial Room", "Presidential Apartment"],
-    "roomCount": 20,
-    "priceRange": { "min": 120, "max": 400 },
-    "cancellationPolicy": "Free cancellation up to 48 hours before check-in",
-    "additionalPolicies": ["No smoking indoors", "Adults only"]
-  },
-  {
-    "name": "Tropical Paradise Resort",
-    "location": {
-      "city": "Palm Beach",
-      "state": "Island",
-      "country": "Maldives",
-      "zipcode": "MV123",
-      "coords": {
-        "lat": "3.2028",
-        "long": "73.2207"
-      }
-    },
-    "contacts": {
-      "email": "info@tropicalparadiseresort.com",
-      "phone": "+960 1234567",
-      "website": "www.tropicalparadiseresort.com"
-    },
-    "address": "45 Seaside Avenue",
-    "description": "Escape to a tropical haven with pristine beaches and clear waters.",
-    "rating": 4.7,
-    "images": ["image31.jpg", "image32.jpg", "image33.jpg"],
-    "facilities": ["Overwater Bungalows", "Dive Center", "Beachfront Dining"],
-    "roomTypes": ["Beach Villa", "Water Villa", "Presidential Suite"],
-    "roomCount": 25,
-    "priceRange": { "min": 300, "max": 1200 },
-    "cancellationPolicy": "Free cancellation up to 72 hours before check-in",
-    "additionalPolicies": [
-      "All-inclusive packages available",
-      "No smoking in enclosed areas"
-    ]
-  },
-  {
-    "name": "Regal Palace Hotel",
-    "location": {
-      "city": "Royaltyville",
-      "state": "Monarchy",
-      "country": "UK",
-      "zipcode": "SW1A 1AA",
-      "coords": {
-        "lat": "51.5074",
-        "long": "-0.1278"
-      }
-    },
-    "contacts": {
-      "email": "info@regalpalacehotel.co.uk",
-      "phone": "+44 20 1234 5678",
-      "website": "www.regalpalacehotel.co.uk"
-    },
-    "address": "1 Royal Street",
-    "description": "Indulge in luxury fit for royalty at the Regal Palace Hotel.",
-    "rating": 4.9,
-    "images": ["image21.jpg", "image22.jpg", "image23.jpg"],
-    "facilities": ["Royal Dining", "Ballroom Events", "Private Gardens"],
-    "roomTypes": ["Royal Suite", "Executive Room", "Classic Chamber"],
-    "roomCount": 60,
-    "priceRange": { "min": 200, "max": 800 },
-    "cancellationPolicy": "Free cancellation up to 48 hours before check-in",
-    "additionalPolicies": [
-      "Formal attire required for dining",
-      "No pets allowed"
-    ]
-  },
-  {
-    "name": "Mountain Lodge Retreat",
-    "location": {
-      "city": "Alpine Village",
-      "state": "Mountainous",
-      "country": "Canada",
-      "zipcode": "V8V 3V4",
-      "coords": {
-        "lat": "48.4284",
-        "long": "-123.3656"
-      }
-    },
-    "contacts": {
-      "email": "info@mountainlodgeretreat.com",
-      "phone": "+1 (555) 876-5432",
-      "website": "www.mountainlodgeretreat.com"
-    },
-    "address": "789 Mountain Trail",
-    "description": "Experience serenity surrounded by majestic mountain views.",
-    "rating": 4.6,
-    "images": ["image14.jpg", "image15.jpg", "image16.jpg"],
-    "facilities": ["Hiking Trails", "Fireplace Lounge", "Spa"],
-    "roomTypes": ["Mountain View Suite", "Cozy Cabin", "Standard Lodge Room"],
-    "roomCount": 40,
-    "priceRange": { "min": 120, "max": 450 },
-    "cancellationPolicy": "Free cancellation up to 72 hours before check-in",
-    "additionalPolicies": ["No smoking", "Pet-friendly accommodation available"]
+    "cabinTypes": ["Log Cabin", "Alpine Lodge"],
+    "description": "A luxurious mountain retreat with stunning views.",
+    "cancellationPolicy": "Free cancellation up to 48 hours before check-in.",
+    "cabinCount": 25,
+    "priceRange": { "min": 150, "max": 300 },
+    "additionalPolicies": ["No pets allowed", "No smoking"],
+    "minBookingLength": 1,
+    "maxBookingLength": 14,
+    "popularfacilities": ["Free Wi-Fi", "Spa", "Restaurant"],
+    "breakFastPrice": 15
   },
   {
     "name": "Seaside Paradise Resort",
     "location": {
-      "city": "Coastal Haven",
-      "state": "Littoral",
+      "city": "Miami",
+      "state": "Florida",
       "country": "USA",
-      "zipcode": "54321",
+      "zipcode": "33139",
       "coords": {
-        "lat": "34.0522",
-        "long": "-118.2437"
+        "lat": "25.7910",
+        "long": "-80.1300"
       }
     },
     "contacts": {
-      "email": "info@seasideparadiseresort.com",
-      "phone": "+1 (555) 987-6543",
-      "website": "www.seasideparadiseresort.com"
+      "email": "reservations@seasideparadise.com",
+      "phone": "+1 555-5678",
+      "website": "www.seasideparadise.com"
     },
-    "address": "456 Oceanfront Drive",
-    "description": "Relax and enjoy breathtaking sunset views from our resort.",
-    "rating": 4.5,
-    "images": ["image4.jpg", "image5.jpg", "image6.jpg"],
-    "facilities": ["Beach Access", "Poolside Bar", "Water Sports"],
-    "roomTypes": ["Beachfront Villa", "Ocean View Room", "Standard Cottage"],
-    "roomCount": 30,
-    "priceRange": { "min": 120, "max": 400 },
-    "cancellationPolicy": "Free cancellation up to 72 hours before check-in",
-    "additionalPolicies": ["No smoking", "Children under 12 stay free"]
+    "address": "456 Ocean Boulevard, Miami, FL 33139, USA",
+    "rating": 4.8,
+    "regularPrice": 300,
+    "discount": 30,
+    "images": ["image3.jpg", "image4.jpg"],
+    "facilities": [
+      "Free Wi-Fi",
+      "Beach Access",
+      "Poolside Bar",
+      "Spa",
+      "Restaurant"
+    ],
+    "cabinTypes": ["Beachfront Cabin", "Luxury Suite"],
+    "description": "A tropical paradise resort with direct beach access.",
+    "cancellationPolicy": "Free cancellation up to 72 hours before check-in.",
+    "cabinCount": 30,
+    "priceRange": { "min": 250, "max": 400 },
+    "additionalPolicies": ["No smoking", "Adults-only"],
+    "minBookingLength": 2,
+    "maxBookingLength": 21,
+    "popularfacilities": ["Free Wi-Fi", "Gym", "Spa"],
+    "breakFastPrice": 25
   },
   {
-    "name": "Luxury Retreat Hotel",
+    "name": "Mountain Retreat Hotel",
     "location": {
-      "city": "Metropolis",
-      "state": "Capital",
-      "country": "Wonderland",
-      "zipcode": "12345",
+      "city": "Aspen",
+      "state": "Colorado",
+      "country": "USA",
+      "zipcode": "81611",
       "coords": {
-        "lat": "40.7128",
-        "long": "-74.0060"
+        "lat": "39.1911",
+        "long": "-106.8175"
       }
     },
     "contacts": {
-      "email": "info@luxuryretreathotel.com",
-      "phone": "+1 (555) 123-4567",
-      "website": "www.luxuryretreathotel.com"
+      "email": "info@mountainretreathotel.com",
+      "phone": "+1 555-1234",
+      "website": "www.mountainretreathotel.com"
     },
-    "address": "123 Serenity Lane",
-    "description": "Experience the epitome of luxury at our exclusive retreat.",
+    "address": "123 Mountain Avenue, Aspen, CO 81611, USA",
+    "rating": 4.5,
+    "regularPrice": 200,
+    "discount": 20,
+    "images": ["image1.jpg", "image2.jpg"],
+    "facilities": [
+      "Free Wi-Fi",
+      "Spa",
+      "Fitness Center",
+      "Restaurant",
+      "Swimming Pool"
+    ],
+    "cabinTypes": ["Log Cabin", "Alpine Lodge"],
+    "description": "A luxurious mountain retreat with stunning views.",
+    "cancellationPolicy": "Free cancellation up to 48 hours before check-in.",
+    "cabinCount": 25,
+    "priceRange": { "min": 150, "max": 300 },
+    "additionalPolicies": ["No pets allowed", "No smoking"],
+    "minBookingLength": 1,
+    "maxBookingLength": 14,
+    "popularfacilities": ["Free Wi-Fi", "Spa", "Restaurant"],
+    "breakFastPrice": 15
+  },
+  {
+    "name": "Seaside Paradise Resort",
+    "location": {
+      "city": "Miami",
+      "state": "Florida",
+      "country": "USA",
+      "zipcode": "33139",
+      "coords": {
+        "lat": "25.7910",
+        "long": "-80.1300"
+      }
+    },
+    "contacts": {
+      "email": "reservations@seasideparadise.com",
+      "phone": "+1 555-5678",
+      "website": "www.seasideparadise.com"
+    },
+    "address": "456 Ocean Boulevard, Miami, FL 33139, USA",
     "rating": 4.8,
-    "images": ["image1.jpg", "image2.jpg", "image3.jpg"],
-    "facilities": ["Pool", "Spa", "Gym", "Fine Dining"],
-    "roomTypes": ["Deluxe Suite", "Executive Room", "Standard Room"],
-    "roomCount": 50,
-    "priceRange": { "min": 150, "max": 500 },
-    "cancellationPolicy": "Free cancellation up to 48 hours before check-in",
-    "additionalPolicies": ["No pets allowed", "No smoking"]
+    "regularPrice": 300,
+    "discount": 30,
+    "images": ["image3.jpg", "image4.jpg"],
+    "facilities": [
+      "Free Wi-Fi",
+      "Beach Access",
+      "Poolside Bar",
+      "Spa",
+      "Restaurant"
+    ],
+    "cabinTypes": ["Beachfront Cabin", "Luxury Suite"],
+    "description": "A tropical paradise resort with direct beach access.",
+    "cancellationPolicy": "Free cancellation up to 72 hours before check-in.",
+    "cabinCount": 30,
+    "priceRange": { "min": 250, "max": 400 },
+    "additionalPolicies": ["No smoking", "Adults-only"],
+    "minBookingLength": 2,
+    "maxBookingLength": 21,
+    "popularfacilities": ["Free Wi-Fi", "Gym", "Spa"],
+    "breakFastPrice": 25
+  },
+  {
+    "name": "Ski Lodge Resort",
+    "location": {
+      "city": "Vail",
+      "state": "Colorado",
+      "country": "USA",
+      "zipcode": "81657",
+      "coords": {
+        "lat": "39.6401",
+        "long": "-106.3745"
+      }
+    },
+    "contacts": {
+      "email": "reservations@skilodgeresort.com",
+      "phone": "+1 555-9876",
+      "website": "www.skilodgeresort.com"
+    },
+    "address": "789 Slopeview Road, Vail, CO 81657, USA",
+    "rating": 4.6,
+    "regularPrice": 250,
+    "discount": 30,
+    "images": ["image9.jpg", "image10.jpg"],
+    "facilities": ["Free Wi-Fi", "Ski Rental", "Hot Tub", "Restaurant"],
+    "cabinTypes": ["Alpine Lodge", "Luxury Suite"],
+    "description": "A cozy ski lodge with easy access to the slopes.",
+    "cancellationPolicy": "Free cancellation up to 72 hours before check-in.",
+    "cabinCount": 18,
+    "priceRange": { "min": 200, "max": 350 },
+    "additionalPolicies": ["No smoking", "Pet-friendly"],
+    "minBookingLength": 2,
+    "maxBookingLength": 14,
+    "popularfacilities": ["Free Wi-Fi", "Gym", "Spa"],
+    "breakFastPrice": 22
+  },
+  {
+    "name": "Desert Mirage Resort",
+    "location": {
+      "city": "Scottsdale",
+      "state": "Arizona",
+      "country": "USA",
+      "zipcode": "85250",
+      "coords": {
+        "lat": "33.4942",
+        "long": "-111.9261"
+      }
+    },
+    "contacts": {
+      "email": "info@desertmirageresort.com",
+      "phone": "+1 555-3456",
+      "website": "www.desertmirageresort.com"
+    },
+    "address": "456 Oasis Drive, Scottsdale, AZ 85250, USA",
+    "rating": 4.4,
+    "regularPrice": 180,
+    "discount": 20,
+    "images": ["image11.jpg", "image12.jpg"],
+    "facilities": ["Free Wi-Fi", "Spa", "Golf Course", "Swimming Pool"],
+    "cabinTypes": ["Adobe Cottage", "Luxury Suite"],
+    "description": "A luxurious desert resort with breathtaking views.",
+    "cancellationPolicy": "Free cancellation up to 48 hours before check-in.",
+    "cabinCount": 22,
+    "priceRange": { "min": 150, "max": 250 },
+    "additionalPolicies": ["No smoking", "Adults-only"],
+    "minBookingLength": 1,
+    "maxBookingLength": 14,
+    "popularfacilities": ["Free Wi-Fi", "Spa", "Gym"],
+    "breakFastPrice": 20
+  },
+
+  {
+    "name": "Lakeview Resort",
+    "location": {
+      "city": "Lake Tahoe",
+      "state": "California",
+      "country": "USA",
+      "zipcode": "96150",
+      "coords": {
+        "lat": "38.9586",
+        "long": "-119.9669"
+      }
+    },
+    "contacts": {
+      "email": "info@lakeviewresort.com",
+      "phone": "+1 555-2345",
+      "website": "www.lakeviewresort.com"
+    },
+    "address": "789 Lakeside Avenue, Lake Tahoe, CA 96150, USA",
+    "rating": 4.7,
+    "regularPrice": 280,
+    "discount": 40,
+    "images": ["image13.jpg", "image14.jpg"],
+    "facilities": [
+      "Free Wi-Fi",
+      "Lakefront Access",
+      "Boat Rental",
+      "Restaurant"
+    ],
+    "cabinTypes": ["Lakeside Cabin", "Luxury Suite"],
+    "description": "A resort with stunning views of Lake Tahoe and direct lakefront access.",
+    "cancellationPolicy": "Free cancellation up to 72 hours before check-in.",
+    "cabinCount": 16,
+    "priceRange": { "min": 250, "max": 400 },
+    "additionalPolicies": ["No smoking", "Pet-friendly"],
+    "minBookingLength": 2,
+    "maxBookingLength": 14,
+    "popularfacilities": ["Free Wi-Fi", "Gym", "Spa"],
+    "breakFastPrice": 25
+  },
+  {
+    "name": "Historic Plaza Hotel",
+    "location": {
+      "city": "Santa Fe",
+      "state": "New Mexico",
+      "country": "USA",
+      "zipcode": "87501",
+      "coords": {
+        "lat": "35.6869",
+        "long": "-105.9378"
+      }
+    },
+    "contacts": {
+      "email": "reservations@historicplazahotel.com",
+      "phone": "+1 555-6789",
+      "website": "www.historicplazahotel.com"
+    },
+    "address": "456 Plaza Street, Santa Fe, NM 87501, USA",
+    "rating": 4.5,
+    "regularPrice": 200,
+    "discount": 20,
+    "images": ["image15.jpg", "image16.jpg"],
+    "facilities": [
+      "Free Wi-Fi",
+      "Historic Architecture",
+      "Courtyard",
+      "Restaurant"
+    ],
+    "cabinTypes": ["Adobe Cottage", "City Loft"],
+    "description": "A historic hotel in the heart of Santa Fe with unique adobe architecture.",
+    "cancellationPolicy": "Free cancellation up to 48 hours before check-in.",
+    "cabinCount": 12,
+    "priceRange": { "min": 180, "max": 250 },
+    "additionalPolicies": ["No smoking", "Pet-friendly"],
+    "minBookingLength": 1,
+    "maxBookingLength": 10,
+    "popularfacilities": ["Free Wi-Fi", "Swimming Pool", "Business Center"],
+    "breakFastPrice": 18
+  },
+  {
+    "name": "Luxury Hotel",
+    "location": {
+      "city": "Cityville",
+      "state": "Stateland",
+      "country": "Countryland",
+      "zipcode": "12345",
+      "coords": {
+        "lat": "12.3456",
+        "long": "78.9012"
+      }
+    },
+    "contacts": {
+      "email": "luxuryhotel@example.com",
+      "phone": "+1234567890",
+      "website": "https://luxuryhotel.com"
+    },
+    "address": "123 Main Street",
+    "rating": 4.5,
+    "regularPrice": 200,
+    "discount": 20,
+    "images": ["image1.jpg", "image2.jpg"],
+    "facilities": ["Free Wifi", "Spa", "Restaurant"],
+    "cabinTypes": ["Standard", "Deluxe"],
+    "description": "A luxurious stay with top-notch amenities.",
+    "cancellationPolicy": "Free cancellation up to 48 hours before check-in.",
+    "cabinCount": 50,
+    "priceRange": { "min": 180, "max": 250 },
+    "additionalPolicies": ["No pets allowed", "Non-smoking rooms"],
+    "minBookingLength": 1,
+    "maxBookingLength": 14,
+    "popularfacilities": ["Free Wi-Fi", "Spa", "Gym"],
+    "breakFastPrice": 15
+  },
+  {
+    "name": "Grand Hotel Plaza",
+    "location": {
+      "city": "New York",
+      "state": "NY",
+      "country": "USA",
+      "zipcode": "10001",
+      "coords": {
+        "lat": "40.730610",
+        "long": "-73.935242"
+      }
+    },
+    "contacts": {
+      "email": "info@grandplaza.com",
+      "phone": "+1 123-456-7890",
+      "website": "https://www.grandplaza.com"
+    },
+    "address": "123 Broadway Ave",
+    "rating": 4.8,
+    "regularPrice": 300,
+    "discount": 15,
+    "images": ["grandplaza_exterior.jpg", "grandplaza_room.jpg"],
+    "facilities": ["Free Wifi", "Spa", "Restaurant", "Business Center"],
+    "cabinTypes": ["Standard Room", "Executive Suite"],
+    "description": "Experience luxury and elegance at Grand Hotel Plaza.",
+    "cancellationPolicy": "Free cancellation up to 72 hours before check-in.",
+    "cabinCount": 120,
+    "priceRange": { "min": 250, "max": 400 },
+    "additionalPolicies": ["No smoking", "Pets allowed (extra fee)"],
+    "minBookingLength": 1,
+    "maxBookingLength": 30,
+    "popularfacilities": ["Free Wi-Fi", "Spa", "Restaurant", "Business Center"],
+    "breakFastPrice": 20
+  },
+  {
+    "name": "Grand Hotel Plaza",
+    "location": {
+      "city": "New York",
+      "state": "NY",
+      "country": "USA",
+      "zipcode": "10001",
+      "coords": {
+        "lat": "40.730610",
+        "long": "-73.935242"
+      }
+    },
+    "contacts": {
+      "email": "info@grandplaza.com",
+      "phone": "+1 123-456-7890",
+      "website": "https://www.grandplaza.com"
+    },
+    "address": "123 Broadway Ave",
+    "rating": 4.8,
+    "regularPrice": 300,
+    "discount": 15,
+    "images": ["grandplaza_exterior.jpg", "grandplaza_room.jpg"],
+    "facilities": ["Free Wifi", "Spa", "Restaurant", "Business Center"],
+    "cabinTypes": ["Standard Room", "Executive Suite"],
+    "description": "Experience luxury and elegance at Grand Hotel Plaza.",
+    "cancellationPolicy": "Free cancellation up to 72 hours before check-in.",
+    "cabinCount": 120,
+    "priceRange": { "min": 250, "max": 400 },
+    "additionalPolicies": ["No smoking", "Pets allowed (extra fee)"],
+    "minBookingLength": 1,
+    "maxBookingLength": 30,
+    "popularfacilities": ["Free Wi-Fi", "Spa", "Restaurant", "Business Center"],
+    "breakFastPrice": 20
+  },
+  {
+    "name": "Seaside Resort & Spa",
+    "location": {
+      "city": "Miami",
+      "state": "FL",
+      "country": "USA",
+      "zipcode": "33101",
+      "coords": {
+        "lat": "25.7617",
+        "long": "-80.1918"
+      }
+    },
+    "contacts": {
+      "email": "info@seasideresort.com",
+      "phone": "+1 987-654-3210",
+      "website": "https://www.seasideresort.com"
+    },
+    "address": "789 Oceanfront Blvd",
+    "rating": 4.5,
+    "regularPrice": 250,
+    "discount": 10,
+    "images": ["seasideresort_pool.jpg", "seasideresort_room.jpg"],
+    "facilities": ["Free Wifi", "Spa", "Swimming Pool", "Restaurant"],
+    "cabinTypes": ["Ocean View Room", "Suite"],
+    "description": "A beachfront paradise with stunning views and top-notch amenities.",
+    "cancellationPolicy": "Free cancellation up to 48 hours before check-in.",
+    "cabinCount": 80,
+    "priceRange": { "min": 200, "max": 300 },
+    "additionalPolicies": ["No pets allowed", "Non-smoking property"],
+    "minBookingLength": 1,
+    "maxBookingLength": 14,
+    "popularfacilities": ["Free Wi-Fi", "Spa", "Swimming Pool", "Restaurant"],
+    "breakFastPrice": 15
+  },
+  {
+    "name": "Mountain Retreat Lodge",
+    "location": {
+      "city": "Aspen",
+      "state": "CO",
+      "country": "USA",
+      "zipcode": "81611",
+      "coords": {
+        "lat": "39.1911",
+        "long": "-106.8175"
+      }
+    },
+    "contacts": {
+      "email": "info@mountainretreat.com",
+      "phone": "+1 555-123-4567",
+      "website": "https://www.mountainretreat.com"
+    },
+    "address": "456 Alpine Way",
+    "rating": 4.2,
+    "regularPrice": 180,
+    "discount": 5,
+    "images": ["mountainretreat_exterior.jpg", "mountainretreat_cabin.jpg"],
+    "facilities": ["Free Wifi", "Spa", "Gym", "Restaurant"],
+    "cabinTypes": ["Standard Cabin", "Luxury Chalet"],
+    "description": "Experience serenity in the heart of the mountains.",
+    "cancellationPolicy": "Free cancellation up to 72 hours before check-in.",
+    "cabinCount": 60,
+    "priceRange": { "min": 150, "max": 250 },
+    "additionalPolicies": ["No smoking", "Pets allowed with restrictions"],
+    "minBookingLength": 1,
+    "maxBookingLength": 21,
+    "popularfacilities": ["Free Wi-Fi", "Spa", "Gym", "Restaurant"],
+    "breakFastPrice": 12
+  },
+  {
+    "name": "Historic Inn & Gardens",
+    "location": {
+      "city": "Charleston",
+      "state": "SC",
+      "country": "USA",
+      "zipcode": "29401",
+      "coords": {
+        "lat": "32.7765",
+        "long": "-79.9311"
+      }
+    },
+    "contacts": {
+      "email": "info@historicinn.com",
+      "phone": "+1 843-555-6789",
+      "website": "https://www.historicinn.com"
+    },
+    "address": "789 Historic Lane",
+    "rating": 4.7,
+    "regularPrice": 220,
+    "discount": 12,
+    "images": ["historicinn_exterior.jpg", "historicinn_garden.jpg"],
+    "facilities": ["Free Wifi", "Restaurant", "Gardens"],
+    "cabinTypes": ["Historic Room", "Suite"],
+    "description": "Step into the charm of the past with a stay at our historic inn.",
+    "cancellationPolicy": "Free cancellation up to 48 hours before check-in.",
+    "cabinCount": 40,
+    "priceRange": { "min": 200, "max": 250 },
+    "additionalPolicies": ["No smoking", "Adults-only property"],
+    "minBookingLength": 1,
+    "maxBookingLength": 14,
+    "popularfacilities": ["Free Wi-Fi", "Restaurant", "Business Center"],
+    "breakFastPrice": 18
   }
 ]

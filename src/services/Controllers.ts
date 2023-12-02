@@ -34,7 +34,7 @@ export class Controller<T extends MongooseModel<any>> {
   async getOne(model: T) {
     return async function (req: Request, res: Response, next: NextFunction) {
       const id = req.params.id;
-      const resourse = await model.findById({ _id: id });
+      const resourse = await model.findOne({ _id: id });
       if (!resourse) return next(new AppError("Resourse not found.", 404));
       res.status(200).json({ status: "success", length: 1, resourse });
     };

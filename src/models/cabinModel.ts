@@ -17,35 +17,19 @@ enum ViewTypeEnum {
 }
 
 export interface Cabin extends Document {
-  cabinName: string;
+  name: string;
   cabinType: string;
   images: string[];
   floor: string;
   maxCapacity: number;
   regularPrice: number;
   discount: number;
-  availability: boolean;
   amenities: string[];
   bedConfigurations: [string];
   description: string;
   viewType: string;
-  hotelId: ObjectId;
-}
-
-enum CabinTypes {
-  DeluxeSuite = "Deluxe Suite",
-  FamilyCabin = "Family Cabin",
-  HoneymoonSuite = "Honeymoon Suite",
-  LogCabin = "Log Cabin",
-  CityLoft = "City Loft",
-  SpaRetreat = "Spa Retreat",
-  LuxuryPenthouse = "Luxury Penthouse",
-  BeachfrontCottage = "Beachfront Cottage",
-  MountainLodge = "Mountain Lodge",
-  GreenSuite = "Green Suite",
-  Standard = "Standard",
-  Deluxe = "deluxe",
-  Suite = "suite",
+  hotel: ObjectId;
+  numBeds: number;
 }
 
 enum BedConfigurations {
@@ -57,68 +41,65 @@ enum BedConfigurations {
   Single = "Single Bed",
 }
 
-const cabinSchema = new Schema<Cabin>({
-  cabinName: {
-    type: String,
-    required: [true, "This field is required"],
-    unique: true as boolean,
-  },
-  cabinType: {
-    type: String,
-    required: [true, "This field is required"],
-    default: CabinTypes.Standard,
-    enum: Object.values(CabinTypes),
-  },
-  images: { type: [String], required: [true, "This field is required"] },
-  floor: { type: String, required: [true, "This field is required"] },
-  maxCapacity: {
-    type: Number,
-    required: [true, "This field is required"],
-    min: [1, "Number guests must be at least 1"],
-    default: 1,
-  },
-  regularPrice: {
-    type: Number,
-    required: [true, "This field is required"],
-  },
-  discount: {
-    type: Number,
-    validate: {
-      validator: function (this: Cabin, val: number): boolean {
-        return val < this.regularPrice;
+const cabinSchema = new Schema<Cabin>(
+  {
+    name: {
+      type: String,
+      required: [true, "This field is required"],
+      unique: true,
+    },
+    cabinType: {
+      type: String,
+      required: [true, "This field is required"],
+    },
+    images: { type: [String], required: [true, "This field is required"] },
+    floor: { type: String, required: [true, "This field is required"] },
+    maxCapacity: {
+      type: Number,
+      required: [true, "This field is required"],
+      min: [1, "Number guests must be at least 1"],
+      default: 1,
+    },
+    regularPrice: {
+      type: Number,
+      required: [true, "This field is required"],
+    },
+    discount: {
+      type: Number,
+      validate: {
+        validator: function (this: Cabin, val: number): boolean {
+          return val < this.regularPrice;
+        },
+        message: "discount must be less than reqular price",
       },
-      message: "discount must be less than reqular price",
+    },
+    amenities: {
+      type: [String],
+    },
+    bedConfigurations: {
+      type: [
+        {
+          type: String,
+          enum: Object.values(BedConfigurations),
+        },
+      ],
+      default: [],
+    },
+    numBeds: { type: Number, default: 1 },
+    description: {
+      type: String,
+    },
+    viewType: {
+      type: String,
+      enum: ViewTypeEnum,
+    },
+    hotel: {
+      type: Schema.Types.ObjectId,
+      ref: "Hotel",
+      required: true,
     },
   },
-  availability: {
-    type: Boolean,
-    required: [true, "This field is required"],
-    default: true,
-  },
-  amenities: {
-    type: [String],
-  },
-  bedConfigurations: {
-    type: [
-      {
-        type: String,
-        enum: Object.values(BedConfigurations),
-      },
-    ],
-    default: [],
-  },
-  description: {
-    type: String,
-  },
-  viewType: {
-    type: String,
-    enum: ViewTypeEnum,
-  },
-  hotelId: {
-    type: Schema.Types.ObjectId,
-    ref: "Hotel",
-    required: true,
-  },
-});
+  { timestamps: true }
+);
 
 export const CabinModel = mongoose.model("Cabin", cabinSchema);

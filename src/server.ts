@@ -1,9 +1,12 @@
+import { CabinModel } from "./models/cabinModel";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import "./controllers/index";
 
 import App from "./app";
-// import { dataUloader } from "./sampleData/dataUploader";
+import { dataUloader } from "./sampleData/dataUploader";
+import { HotelModel } from "./models/hotelModel";
+import { BookingModel } from "./models/bookingModel";
 
 dotenv.config();
 const port = process.env.PORT || 8000;
@@ -17,7 +20,9 @@ const db = mongoose.connect(cloudUrl);
 
 db.then(() => {
   console.log("mongodb connect sucessfully!");
-  // dataUloader()
+  // dataUloader(CabinModel, "./src/sampleData/cabinData.json");
+  // dataUloader(HotelModel, "./src/sampleData/hotelData.json");
+  // dataUloader(BookingModel, "./src/sampleData/bookingData.json");
 });
 
 App.listen(port, () => {
