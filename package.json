@@ -27,7 +27,8 @@
     "mongoose": "^8.0.1",
     "morgan": "^1.10.0",
     "nodemon": "^3.0.1",
-    "reflect-metadata": "^0.1.13"
+    "reflect-metadata": "^0.1.13",
+    "stripe": "^14.7.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
@@ -35,6 +36,7 @@
     "@types/express": "^4.17.21",
     "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.9",
+    "@types/stripe": "^8.0.417",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.3.2"
   }

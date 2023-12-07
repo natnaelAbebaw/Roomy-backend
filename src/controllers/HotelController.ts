@@ -1,12 +1,13 @@
 import { NextFunction, Request, Response } from "express";
+import stripe from "stripe";
+
 import { controller } from "../decorators/controller";
 import { del, get, patch, post } from "../decorators/routeHandles";
 import { HotelModel } from "../models/hotelModel";
-import { ApiFeatures } from "../services/ApiFeatures";
 import { Controller } from "../services/Controllers";
 import { BookingModel, Booking } from "../models/bookingModel";
 import { CabinModel, Cabin } from "../models/cabinModel";
-import mongoose, { RootQuerySelector } from "mongoose";
+import AppError from "../services/AppError";
 
 @controller("/hotels")
 export class HotelsController extends Controller<typeof HotelModel> {
@@ -107,7 +108,7 @@ export class HotelsController extends Controller<typeof HotelModel> {
             images: { $first: "$images" },
             regularPrice: { $avg: "$regularPrice" },
             discount: { $avg: "$discount" },
-            amenities:{ $first: "$amenities"},    
+            amenities: { $first: "$amenities" },
             availableCabins: {
               $push: {
                 $cond: [{ $in: ["$_id", reserverdCabinId] }, null, "$_id"],
@@ -143,7 +144,43 @@ export class HotelsController extends Controller<typeof HotelModel> {
 
   @post()
   createHotel() {
-    return this.create(HotelModel);
+    return async function (req: Request, res: Response) {
+      const resourse = await HotelModel.create(req.body);
+      const stripeApi = new stripe(process.env.STRIPE_SECRET_KEY as string);
+
+      const account = await stripeApi.accounts.create({
+        type: "express",
+        capabilities: {
+          card_payments: {
+            requested: true,
+          },
+          transfers: {
+            requested: true,
+          },
+        },
+      });
+      resourse.stripeAccountId = account.id;
+
+      await resourse.save();
+
+      res.status(201).json({ status: "success", length: 1, resourse, account });
+    };
+  }
+
+  @get("/stripeLink/:id")
+  getStripeLink() {
+    return async function (req: Request, res: Response, next: NextFunction) {
+      const hotel = await HotelModel.findById(req.params.id);
+      if (!hotel) return next(new AppError("Hotel not found", 404));
+      const stripeApi = new stripe(process.env.STRIPE_SECRET_KEY as string);
+      const accountLink = await stripeApi.accountLinks.create({
+        account: hotel.stripeAccountId,
+        refresh_url: "http://localhost:8000/hotels",
+        return_url: "http://localhost:8000/hotels",
+        type: "account_onboarding",
+      });
+      res.status(200).json({ status: "success", accountLink });
+    };
   }
 
   @del("/:id")

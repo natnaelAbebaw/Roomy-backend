@@ -33,6 +33,8 @@ export interface Hotel extends Document {
   maxBookingLength: number;
   popularfacilities: string[];
   breakFastPrice: number;
+  hotelAccount: mongoose.Schema.Types.ObjectId;
+  stripeAccountId: string;
 }
 
 enum PopularFacilitiesEnum {
@@ -86,6 +88,8 @@ const hotelSchema = new mongoose.Schema<Hotel>(
     breakFastPrice: { type: Number, default: 0 },
     cancellationPolicy: String,
     additionalPolicies: [String],
+    hotelAccount: { type: mongoose.Schema.Types.ObjectId, ref: "HotelAccount" ,requried:true},
+    stripeAccountId: String,
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
