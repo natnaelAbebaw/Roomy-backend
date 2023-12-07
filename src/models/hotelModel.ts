@@ -95,10 +95,5 @@ hotelSchema.virtual("cabins", {
   localField: "_id",
   foreignField: "hotel",
 });
-hotelSchema.pre("findOne", function (next) {
-  console.log("pre find one");
-  this.populate({ path: "cabins" });
-  next();
-});
 
 export const HotelModel = mongoose.model("Hotel", hotelSchema);
