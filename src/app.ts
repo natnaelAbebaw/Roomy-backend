@@ -1,4 +1,8 @@
-import { CabinController, HotelsController } from "./controllers/index";
+import {
+  CabinController,
+  HotelsController,
+  BookingController,
+} from "./controllers/index";
 import express, { Express, Request, Response, NextFunction } from "express";
 import morgan from "morgan";
 import AppError from "./services/AppError";
@@ -11,6 +15,7 @@ App.use(express.json());
 App.use(express.urlencoded({ extended: true }));
 App.use(CabinController.getRouter());
 App.use(HotelsController.getRouter());
+App.use(BookingController.getRouter());
 
 App.all("*", (req: Request, res: Response, next: NextFunction) => {
   next(new AppError(`Route not found: ${req.originalUrl}`, 404));

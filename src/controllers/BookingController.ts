@@ -4,7 +4,7 @@ import { BookingModel } from "../models/bookingModel";
 import { Controller } from "../services/Controllers";
 
 @controller("/bookings")
-export class CabinController extends Controller<typeof BookingModel> {
+export class BookingController extends Controller<typeof BookingModel> {
   @get()
   getBookingAll() {
     return this.getAll(BookingModel);
