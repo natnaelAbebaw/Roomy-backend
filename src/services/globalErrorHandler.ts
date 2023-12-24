@@ -54,6 +54,16 @@ export function globalErrorHandler(
         .toString();
 
       errorSendToProd(new AppError(messages, 400), res);
+    } else if (error.name === "TokenExpiredError") {
+      errorSendToProd(
+        new AppError("Token has expired. please login agin", 401),
+        res
+      );
+    } else if (error.name === "JsonWebTokenError") {
+      errorSendToProd(
+        new AppError("Invalid token signature. please login agin", 401),
+        res
+      );
     } else {
       errorSendToProd(new AppError("Something is very wrong.", 500), res);
     }

@@ -1,5 +1,5 @@
-import { controller } from "../decorators/controller";
-import { del, get, patch, post } from "../decorators/routeHandles";
+import { controller } from "../decorators/controllerDecorator";
+import { del, get, patch, post } from "../decorators/routeHandlerDecorators";
 import { BookingModel } from "../models/bookingModel";
 import { Controller } from "../services/Controllers";
 

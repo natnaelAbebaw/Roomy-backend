@@ -9,7 +9,7 @@ export class Controller<T extends MongooseModel<any>> {
 
   static getRouter() {
     if (!Controller.router) {
-      Controller.router = Router();
+      Controller.router = Router({ mergeParams: true });
     }
     return Controller.router;
   }

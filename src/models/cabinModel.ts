@@ -46,7 +46,6 @@ const cabinSchema = new Schema<Cabin>(
     name: {
       type: String,
       required: [true, "This field is required"],
-      unique: true,
     },
     cabinType: {
       type: String,

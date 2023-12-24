@@ -88,7 +88,11 @@ const hotelSchema = new mongoose.Schema<Hotel>(
     breakFastPrice: { type: Number, default: 0 },
     cancellationPolicy: String,
     additionalPolicies: [String],
-    hotelAccount: { type: mongoose.Schema.Types.ObjectId, ref: "HotelAccount" ,requried:true},
+    hotelAccount: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "HotelAccount",
+      requried: true,
+    },
     stripeAccountId: String,
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
@@ -100,4 +104,4 @@ hotelSchema.virtual("cabins", {
   foreignField: "hotel",
 });
 
-export const HotelModel = mongoose.model("Hotel", hotelSchema);
+export const HotelModel = mongoose.model<Hotel>("Hotel", hotelSchema);

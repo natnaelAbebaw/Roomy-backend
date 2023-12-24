@@ -4,12 +4,16 @@ type MongooseModel<T extends Document> = Model<T, {}>;
 
 export class ApiFeatures {
   public query: any;
-  constructor(private model: MongooseModel<any>, private body: any) {
+  constructor(
+    private model: MongooseModel<any>,
+    private body: any,
+  ) {
+  ;
     this.query = model.find();
   }
 
   applyFilter() {
-    let filterObj = { ...this.body };
+    let filterObj = { ...this.body};
     const excludedFields = ["page", "limit", "fields", "sort"];
     excludedFields.forEach((field) => delete filterObj[field]);
     filterObj = JSON.parse(

@@ -7,4 +7,4 @@ const reviewSchema = new mongoose.Schema({
   guest: { type: mongoose.Schema.ObjectId, ref: "Guest", required: true },
 });
 
-export const SettingModel = mongoose.model("Hotel", reviewSchema);
+export const SettingModel = mongoose.model("Review", reviewSchema);

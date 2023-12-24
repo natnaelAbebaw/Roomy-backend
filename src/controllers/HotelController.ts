@@ -1,18 +1,28 @@
 import { NextFunction, Request, Response } from "express";
 import stripe from "stripe";
 
-import { controller } from "../decorators/controller";
-import { del, get, patch, post } from "../decorators/routeHandles";
+import { controller } from "../decorators/controllerDecorator";
+import { del, get, patch, post } from "../decorators/routeHandlerDecorators";
+import { protect } from "../decorators/authDecorators";
 import { HotelModel } from "../models/hotelModel";
 import { Controller } from "../services/Controllers";
 import { BookingModel, Booking } from "../models/bookingModel";
 import { CabinModel, Cabin } from "../models/cabinModel";
+import { nestedRoute } from "../decorators/nestedRouteDecorator";
+import { CabinController } from "./CabinControllers";
 import AppError from "../services/AppError";
+import { RolesModel, Roles } from "../models/rolesModel";
+import { accounts } from "../decorators/accounts";
+
+type RequestM = Request & { user?: any };
 
 @controller("/hotels")
+@nestedRoute("/:hotelId", CabinController.getRouter())
 export class HotelsController extends Controller<typeof HotelModel> {
+  // func
   @get()
   getHotelAll() {
+    console.log(this);
     return this.getAll(HotelModel);
   }
 
@@ -34,7 +44,7 @@ export class HotelsController extends Controller<typeof HotelModel> {
         ],
       });
       const reserverdCabinId = bookings.map((book: Booking) => book.cabin);
-      // console.log(reserverdCabinId);
+
       const availableCabins =
         (await CabinModel.find({
           _id: { $nin: reserverdCabinId },
@@ -141,12 +151,21 @@ export class HotelsController extends Controller<typeof HotelModel> {
       res.status(200).json({ hotel, cabins });
     };
   }
-
+  @protect(accounts.hotelAccount)
   @post()
   createHotel() {
-    return async function (req: Request, res: Response) {
-      const resourse = await HotelModel.create(req.body);
+    return async function (req: RequestM, res: Response) {
+      const resourse = await HotelModel.create({
+        ...req.body,
+        hotelAccount: req.user._id,
+      });
       const stripeApi = new stripe(process.env.STRIPE_SECRET_KEY as string);
+
+      await RolesModel.create({
+        role: Roles.admin,
+        hotel: resourse._id,
+        hotelAccount: resourse.hotelAccount,
+      });
 
       const account = await stripeApi.accounts.create({
         type: "express",
