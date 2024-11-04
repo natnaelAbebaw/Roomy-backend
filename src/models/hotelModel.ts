@@ -7,6 +7,7 @@ export interface Hotel extends Document {
     state: string;
     country: string;
     zipcode: string;
+    continent: string;
     coords: {
       lat: string;
       long: string;
@@ -17,11 +18,16 @@ export interface Hotel extends Document {
     phone: String;
     website: String;
   };
+  currency: string;
   address: string;
-  rating: number;
-  regularPrice: number;
+  ratingAverage: number;
+  countryISOCode: string;
+  starRating: number;
+  checkinTime: string;
+  checkoutTime: string;
   discount: number;
-  images: string[];
+  mainImage: string;
+  albumImages: string[];
   facilities: string[];
   cabinTypes: string[];
   description: string;
@@ -42,13 +48,31 @@ enum PopularFacilitiesEnum {
   spa = "Spa",
   gym = "Gym",
   airportRransfer = "Airport transfer",
-  freeParking = "FreeParking",
+  freeParking = "Free Parking",
   restaurant = "Restaurant",
   airConditioning = "Air Conditioning",
   swimmingPool = "Swimming Pool",
   bar = "Bar/lounge",
   conferenceRoom = "Conference room",
   businessCenter = "Business Center",
+  laundryService = "Laundry Service",
+  petsAllowed = "Pets allowed",
+  familyRooms = "Family rooms",
+  balcony = "Balcony",
+  elevator = "Elevator",
+  heating = "Heating",
+}
+
+export enum CabinTypes {
+  singleBed = "Single Bed",
+  doubleBed = "Double Bed",
+  twinBed = "Twin Bed",
+  tripleBed = "Triple Bed",
+  quadBed = "Quad Bed",
+  queenBed = "Queen Bed",
+  kingBed = "King Bed",
+  suite = "Suite",
+  studio = "Studio",
 }
 
 const hotelSchema = new mongoose.Schema<Hotel>(
@@ -60,6 +84,7 @@ const hotelSchema = new mongoose.Schema<Hotel>(
         state: String,
         country: String,
         zipcode: String,
+        continent: String,
         coords: {
           lat: String,
           long: String,
@@ -74,10 +99,16 @@ const hotelSchema = new mongoose.Schema<Hotel>(
     },
     address: { type: String, required: true },
     description: String,
-    rating: { type: Number, default: 0 },
-    images: [String],
+    currency: String,
+    starRating: Number,
+    checkinTime: String,
+    countryISOCode: String,
+    checkoutTime: String,
+    ratingAverage: { type: Number, default: 0 },
+    mainImage: String,
+    albumImages: [String],
     facilities: [String],
-    cabinTypes: [String],
+    cabinTypes: [{ type: String, enum: Object.values(CabinTypes) }],
     cabinCount: { type: Number, default: 0 },
     priceRange: { min: Number, max: Number },
     minBookingLength: { type: Number, default: 1 },

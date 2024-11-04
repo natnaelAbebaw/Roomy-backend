@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response, Router } from "express";
 import { controller } from "../decorators/controllerDecorator";
 import { del, get, patch, post } from "../decorators/routeHandlerDecorators";
 import { protect, restrictTo } from "../decorators/authDecorators";
@@ -8,47 +8,59 @@ import { ApiFeatures } from "../services/ApiFeatures";
 import { Controller } from "../services/Controllers";
 import { accounts } from "../decorators/accounts";
 import AppError from "../services/AppError";
+import { CabinReviewController } from "./CabinsReviewController";
+import { UploadFiles } from "../decorators/UploadFilesDecorator";
 
-@controller("/cabins")
+interface MulterRequest extends Request {
+  files?: Express.Multer.File[]; // Multiple files
+}
+
+@controller("/cabins", {
+  nestedRoutes: [CabinReviewController],
+})
 export class CabinController extends Controller<typeof CabinModel> {
-  @protect()
   @get()
   getCabinAll() {
+    const CabinController = this;
     return async function (req: Request, res: Response, next: NextFunction) {
-      const hotelQuery = req.params.hotelId
-        ? { hotel: req.params.hotelId }
-        : {};
-      const apiFeature = new ApiFeatures(CabinModel, req.query);
-      const err = await apiFeature
-        .applyFilter()
-        .applySort()
-        .applyFields()
-        .applyPagnation()
-        .catch((err) => err);
-      if (err) return next(err);
-      const resourses = await apiFeature.query.where(hotelQuery);
-      res
-        .status(200)
-        .json({ status: "success", length: resourses.length, resourses });
+      req.query.hotel = req.params.hotelsId;
+      CabinController.getAll(CabinModel, req, res, next);
     };
   }
 
-  @protect()
+  // @protect()
   @get("/:id")
   getCabin() {
     return this.getOne(CabinModel);
   }
 
-  @protect(accounts.hotelAccount)
-  @restrictTo(Roles.admin, Roles.manager)
+  // @protect(accounts.hotelAccount)
+  // @restrictTo(Roles.admin, Roles.manager)
+  @UploadFiles("albumImages")
   @post()
   createCabin() {
-    return async function (req: Request, res: Response, next: NextFunction) {
+    return async function (
+      req: MulterRequest,
+      res: Response,
+      next: NextFunction
+    ) {
       let cabinObject = req.body;
-      if (req.params.hotelId)
-        cabinObject = { ...cabinObject, hotel: req.params.hotelId };
+      cabinObject.albumImages = cabinObject.albumImages
+        ? cabinObject.albumImages
+        : req.files?.map((file) => `/uploads/${file.filename}`);
 
-      // duplicated cabin name
+      cabinObject = { ...cabinObject, hotel: req.params.hotelsId };
+      cabinObject.amenities =
+        cabinObject.amenities && !Array.isArray(cabinObject.amenities)
+          ? cabinObject.amenities.split(",")
+          : cabinObject.amenities;
+      cabinObject.bedConfigurations =
+        cabinObject.bedConfigurations &&
+        !Array.isArray(cabinObject.bedConfigurations)
+          ? cabinObject.bedConfigurations.split(",")
+          : cabinObject.bedConfigurations;
+      cabinObject.createdAt = undefined;
+      cabinObject.updatedAt = undefined;
       const cabin = await CabinModel.find({
         name: req.body.name,
         hotel: req.params.hotelId,
@@ -68,8 +80,35 @@ export class CabinController extends Controller<typeof CabinModel> {
     return this.delete(CabinModel);
   }
 
+  @UploadFiles("albumImages")
   @patch("/:id")
   updateCabin() {
-    return this.update(CabinModel);
+    // return this.update(CabinModel);
+    const CabinController = this;
+    return async function (
+      req: MulterRequest,
+      res: Response,
+      next: NextFunction
+    ) {
+      req.query.hotel = req.params.hotelsId;
+
+      req.body.albumImages =
+        req.files?.length === 0
+          ? undefined
+          : req.files?.map((file) => `/uploads/${file.filename}`);
+
+      req.body.amenities =
+        req.body.amenities && !Array.isArray(req.body.amenities)
+          ? req.body.amenities.split(",")
+          : req.body.amenities || [];
+
+      req.body.bedConfigurations =
+        req.body.bedConfigurations && !Array.isArray(req.body.bedConfigurations)
+          ? req.body.bedConfigurations.split(",")
+          : req.body.bedConfigurations || [];
+
+      console.log(req.body);
+      CabinController.update(CabinModel, req, res, next);
+    };
   }
 }

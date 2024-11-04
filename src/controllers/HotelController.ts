@@ -1,37 +1,44 @@
-import { NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response, Router } from "express";
 import stripe from "stripe";
 
 import { controller } from "../decorators/controllerDecorator";
 import { del, get, patch, post } from "../decorators/routeHandlerDecorators";
 import { protect } from "../decorators/authDecorators";
-import { HotelModel } from "../models/hotelModel";
+import { CabinTypes, HotelModel } from "../models/hotelModel";
 import { Controller } from "../services/Controllers";
 import { BookingModel, Booking } from "../models/bookingModel";
 import { CabinModel, Cabin } from "../models/cabinModel";
-import { nestedRoute } from "../decorators/nestedRouteDecorator";
-import { CabinController } from "./CabinControllers";
+
 import AppError from "../services/AppError";
 import { RolesModel, Roles } from "../models/rolesModel";
 import { accounts } from "../decorators/accounts";
+import { ApiFeatures } from "../services/ApiFeatures";
+import { ObjectId } from "mongodb";
+import { Schema } from "mongoose";
+import { CabinController } from "./CabinControllers";
+import { HotelReviewController } from "./HotelsReviewController";
+import { BookingController } from "./BookingController";
 
 type RequestM = Request & { user?: any };
 
-@controller("/hotels")
-@nestedRoute("/:hotelId", CabinController.getRouter())
+@controller("/hotels", {
+  nestedRoutes: [CabinController, HotelReviewController, BookingController],
+})
 export class HotelsController extends Controller<typeof HotelModel> {
-  // func
   @get()
   getHotelAll() {
-    console.log(this);
     return this.getAll(HotelModel);
   }
 
-  @get("/q")
-  searchHotels() {
-    return async function (req: Request, res: Response, next: NextFunction) {
-      const { city, country, state, checkinDate, checkoutDate, numGuests } =
-        req.query;
-      const bookings = await BookingModel.find({
+  async searchHotels(req: Request) {
+    const { city, country, state, checkinDate, checkoutDate, numGuests } =
+      req.query;
+
+    let bookings: Booking[] = [];
+    let filterQuery: any = {};
+
+    if (checkinDate && checkoutDate && numGuests) {
+      bookings = await BookingModel.find({
         $or: [
           {
             checkInDate: { $lte: new Date(checkinDate as string) },
@@ -43,27 +50,70 @@ export class HotelsController extends Controller<typeof HotelModel> {
           },
         ],
       });
-      const reserverdCabinId = bookings.map((book: Booking) => book.cabin);
 
-      const availableCabins =
+      const reserverdCabinId = bookings.map((book: Booking) => book.cabin);
+      let availableCabins: Cabin[] = [];
+
+      availableCabins =
         (await CabinModel.find({
           _id: { $nin: reserverdCabinId },
           maxCapacity: { $gte: numGuests },
         })) || [];
 
-      // console.log(availableCabins);
-
       const availableHotelId = availableCabins.map(
         (cabin: Cabin) => cabin.hotel
       );
-      // console.log(availableHotelId);
 
-      const hotels = await HotelModel.find({
-        _id: { $in: availableHotelId },
-        "location.city": city,
-        "location.state": state,
-        "location.country": country,
-      });
+      filterQuery = { _id: { in: availableHotelId } };
+    }
+
+    if (city) filterQuery["location.city"] = city;
+    if (state) filterQuery["location.state"] = state;
+    if (country) filterQuery["location.country"] = country;
+
+    const searchQueryString = [
+      "city",
+      "state",
+      "country",
+      "numGuests",
+      "checkinDate",
+      "checkoutDate",
+    ];
+    for (const key in req.query) {
+      if (
+        !searchQueryString.includes(key) &&
+        req.query[key] &&
+        req.query[key] !== ""
+      ) {
+        filterQuery[key] = req.query[key];
+      }
+    }
+
+    return filterQuery;
+  }
+
+  @get("/q")
+  Hotels(this: HotelsController) {
+    const hotelController = this;
+    return async function (req: Request, res: Response, next: NextFunction) {
+      const filterQuery = await hotelController.searchHotels(req);
+      for (const key in filterQuery) {
+        if (filterQuery[key].all && !Array.isArray(filterQuery[key].all)) {
+          filterQuery[key] = { all: filterQuery[key].all.split(",") };
+        }
+      }
+
+      console.log(filterQuery);
+      const apiFeature = new ApiFeatures(HotelModel, filterQuery);
+      const err = await apiFeature
+        .applyFilter()
+        .applySort()
+        .applyFields()
+        .applyPagnation()
+        .catch((err) => err);
+      if (err) return next(err);
+
+      const hotels = await apiFeature.query;
 
       res
         .status(200)
@@ -71,42 +121,185 @@ export class HotelsController extends Controller<typeof HotelModel> {
     };
   }
 
+  @get("/hotelStats")
+  getHotelStats(this: HotelsController) {
+    const hotelController = this;
+    return async function (req: Request, res: Response, next: NextFunction) {
+      let filterQuery = await hotelController.searchHotels(req);
+
+      filterQuery = JSON.parse(
+        JSON.stringify(filterQuery).replace(
+          /\b(gte|gt|lte|le|in|all)\b/g,
+          (match) => `$${match}`
+        )
+      );
+
+      for (const key in filterQuery) {
+        if (filterQuery[key].$all && !Array.isArray(filterQuery[key].$all)) {
+          filterQuery[key].$all = filterQuery[key].$all.split(",");
+        }
+        if (filterQuery[key].$in && !Array.isArray(filterQuery[key].$in)) {
+          filterQuery[key].$in = [filterQuery[key].$in];
+        }
+        if (
+          filterQuery[key].$lte ||
+          filterQuery[key].$gte ||
+          filterQuery[key].$lt ||
+          filterQuery[key].$gt ||
+          filterQuery[key].$eq
+        ) {
+          for (const k in filterQuery[key]) {
+            filterQuery[key][k] = Number(filterQuery[key][k]);
+          }
+        }
+      }
+
+      if (filterQuery._id && filterQuery._id.$in) {
+        filterQuery._id.$in = filterQuery._id.$in.map(
+          (id: string) => new ObjectId(id)
+        );
+      }
+
+      console.log(filterQuery);
+      const hotelStats = await HotelModel.aggregate([
+        {
+          $match: filterQuery,
+        },
+        {
+          $count: "totalHotels",
+        },
+      ]);
+
+      res
+        .status(200)
+        .json({ status: "success", length: 1, hotelStats: hotelStats[0] });
+    };
+  }
+
+  @get("/getHotelPriceRangeStats")
+  getHoteLPriceRangeStats() {
+    return async function (req: Request, res: Response, next: NextFunction) {
+      const { cabinTypes } = req.query;
+
+      const minmaxPrice: { minPrice: number; maxPrice: number }[] =
+        await HotelModel.aggregate([
+          {
+            $group: {
+              _id: null,
+              minPrice: { $min: "$priceRange.min" },
+              maxPrice: { $max: "$priceRange.max" },
+            },
+          },
+        ]);
+
+      function generateBoundaries(min: number, max: number, gap: number) {
+        const boundaries = [min];
+        let current = min;
+
+        while (current < max) {
+          current += gap;
+          boundaries.push(current);
+        }
+
+        if (boundaries[boundaries.length - 1] <= max) {
+          boundaries.push(max + gap);
+        }
+
+        return boundaries;
+      }
+
+      const boundaries = generateBoundaries(
+        minmaxPrice[0].minPrice,
+        minmaxPrice[0].maxPrice,
+        20
+      );
+
+      const priceRanges = await HotelModel.aggregate([
+        {
+          $match: {
+            cabinTypes: {
+              $in: cabinTypes ? [cabinTypes] : Object.values(CabinTypes),
+            },
+          },
+        },
+        {
+          $project: {
+            averagePrice: {
+              $avg: ["$priceRange.min", "$priceRange.max"],
+            },
+          },
+        },
+        {
+          $bucket: {
+            groupBy: "$averagePrice",
+            boundaries: boundaries,
+            default: "Other",
+            output: {
+              count: { $sum: 1 },
+            },
+          },
+        },
+      ]);
+
+      for (const i of boundaries) {
+        if (!priceRanges.find((range) => range._id === i)) {
+          priceRanges.push({ _id: i, count: 0 });
+        }
+      }
+
+      res.status(200).json({
+        status: "success",
+        length: priceRanges.length,
+        priceStats: {
+          priceRanges: priceRanges.sort((a, b) => a._id - b._id),
+          maxCount: Math.max(...priceRanges.map((range) => range.count)),
+          maxPrice: minmaxPrice[0].maxPrice,
+          minPrice: minmaxPrice[0].minPrice,
+        },
+      });
+    };
+  }
+
   @get("/:id")
   getHotel() {
+    console.log("hotel id");
     return this.getOne(HotelModel);
   }
 
   @get("/cabinStats/:id")
-  getHotelAndCabinStats() {
+  getCabinStats() {
     return async function (req: Request, res: Response, next: NextFunction) {
-      // 1 find the hotel by id
       const id = req.params.id;
-      const { checkinDate, checkoutDate } = req.query;
+      const { checkinDate, checkoutDate, numGuests } = req.query;
+      // find  cabins not reserved in the hotel with the given date
+      let reserverdCabinId: Schema.Types.ObjectId[] = [];
 
-      const hotel = await HotelModel.findById(id);
+      if (checkinDate && checkoutDate) {
+        const bookings = await BookingModel.find({
+          hotel: id,
+          $or: [
+            {
+              checkInDate: { $lte: new Date(checkinDate as string) },
+              checkOutDate: { $gte: new Date(checkinDate as string) },
+            },
+            {
+              checkInDate: { $lte: new Date(checkoutDate as string) },
+              checkOutDate: { $gte: new Date(checkoutDate as string) },
+            },
+          ],
+        });
 
-      // check if the cabin is available
-      if (!hotel) return;
-
-      // find the cabins not reserved in the hotel with the given date
-      const bookings = await BookingModel.find({
-        hotel: hotel._id,
-        $or: [
-          {
-            checkInDate: { $lte: new Date(checkinDate as string) },
-            checkOutDate: { $gte: new Date(checkinDate as string) },
-          },
-          {
-            checkInDate: { $lte: new Date(checkoutDate as string) },
-            checkOutDate: { $gte: new Date(checkoutDate as string) },
-          },
-        ],
-      });
-      const reserverdCabinId = bookings.map((book: Booking) => book.cabin);
-
+        reserverdCabinId = bookings.map((book: Booking) => book.cabin);
+        console.log(reserverdCabinId);
+      }
       // 2. process the cabins data in the hotel and return the stats
       const cabins = await CabinModel.aggregate([
-        { $match: { hotel: hotel._id } },
+        {
+          $match: {
+            hotel: new ObjectId(id),
+            maxCapacity: { $gte: Number(numGuests || 1) },
+          },
+        },
         {
           $group: {
             _id: "$cabinType",
@@ -115,7 +308,7 @@ export class HotelsController extends Controller<typeof HotelModel> {
               $sum: { $cond: [{ $in: ["$_id", reserverdCabinId] }, 0, 1] },
             },
             maxCapacity: { $avg: "$maxCapacity" },
-            images: { $first: "$images" },
+            images: { $first: "$albumImages" },
             regularPrice: { $avg: "$regularPrice" },
             discount: { $avg: "$discount" },
             amenities: { $first: "$amenities" },
@@ -148,9 +341,10 @@ export class HotelsController extends Controller<typeof HotelModel> {
         },
       ]);
 
-      res.status(200).json({ hotel, cabins });
+      res.status(200).json({ cabins });
     };
   }
+
   @protect(accounts.hotelAccount)
   @post()
   createHotel() {

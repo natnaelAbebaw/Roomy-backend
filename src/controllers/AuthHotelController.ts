@@ -13,7 +13,7 @@ export class AuthHotelController extends AuthController<
     return this.signup(HotelAccountModel);
   }
 
-  @get("/login")
+  @post("/login")
   loginHotelAccount() {
     return this.login(HotelAccountModel);
   }

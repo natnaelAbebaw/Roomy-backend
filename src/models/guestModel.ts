@@ -14,7 +14,12 @@ export interface Guest extends Document {
   password: string;
   nationality: string;
   nationalID: string;
+  avatarUrl: string;
   confirmPassword: string | undefined;
+  address: {
+    city?: string;
+    country?: string;
+  };
   compPasswords(password: string): boolean;
   passwordChangeAt: Date;
   passwordResetToken: String;
@@ -53,11 +58,16 @@ const guestSchema = new mongoose.Schema<Guest>(
     },
     nationality: { type: String, required: true },
     nationalID: { type: String, required: true },
+    avatarUrl: { type: String },
     passwordChangeAt: {
       type: Date,
       required: true,
       default: Date.now(),
       select: false,
+    },
+    address: {
+      city: { type: String },
+      country: { type: String },
     },
     passwordResetToken: String,
     passwordResetTokenExpiresAt: Date,

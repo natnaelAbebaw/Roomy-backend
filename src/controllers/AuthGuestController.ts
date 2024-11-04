@@ -3,6 +3,7 @@ import { protect } from "../decorators/authDecorators";
 import { get, post, patch, del } from "../decorators/routeHandlerDecorators";
 import { GuestModel } from "../models/guestModel";
 import { AuthController } from "./AuthController";
+import { Router } from "express";
 
 @controller("/guests")
 export class AuthGuestController extends AuthController<typeof GuestModel> {

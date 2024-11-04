@@ -1,12 +1,19 @@
 import { CabinModel } from "./models/cabinModel";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+
 import "./controllers/index";
+// import "./sampleData/dataUploader";
 
 import App from "./app";
-import { dataUloader } from "./sampleData/dataUploader";
-import { HotelModel } from "./models/hotelModel";
-import { BookingModel } from "./models/bookingModel";
+// import { guestDataUploader } from "./sampleData/guestDataUploader";
+// import { hotelRewiewUploader } from "./sampleData/hotelReviewUploader";
+// import { hotelDataUploader } from "./sampleData/HotelDataUploader";
+// import { cabinDataUploader } from "./sampleData/cabinDataUploader";
+// import { bookingDataUploader } from "./sampleData/bookingDateUploader";
+// import { addMoreHotelhotel } from "./sampleData/addMoreHotels";
+// import { CabinUploaderForHotel } from "./sampleData/CabinUploaderForHotel";
+import { todaysBookingDataUploader } from "./sampleData/TodaysBookingDateUploader";
 
 dotenv.config();
 const port = process.env.PORT || 8000;
@@ -20,9 +27,15 @@ const db = mongoose.connect(cloudUrl);
 
 db.then(() => {
   console.log("mongodb connect sucessfully!");
-  // dataUloader(CabinModel, "./src/sampleData/cabinData.json");
-  // dataUloader(HotelModel, "./src/sampleData/hotelData.json");
-  // dataUloader(BookingModel, "./src/sampleData/bookingData.json");
+
+  // hotelDataUploader(HotelModel, "./src/sampleData/hotelData.json");
+  // addMoreHotelhotel("./src/sampleData/hotelData.json");
+  // bookingDataUploader();
+  // hotelRewiewUploader();
+  // cabinDataUploader();
+  // guestDataUploader();
+  // CabinUploaderForHotel("6617a3dac51520bf4181ba50");
+  // todaysBookingDataUploader();
 });
 
 App.listen(port, () => {

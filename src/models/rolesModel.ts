@@ -17,7 +17,7 @@ const rolesSchema = new mongoose.Schema<Role>({
   hotel: { type: mongoose.Schema.ObjectId, ref: "Hotel", required: true },
   hotelAccount: {
     type: mongoose.Schema.ObjectId,
-    ref: "Guest",
+    ref: "HotelAccount",
     required: true,
   },
 });

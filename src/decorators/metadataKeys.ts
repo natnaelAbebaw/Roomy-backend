@@ -4,4 +4,5 @@ export enum metadataKeys {
   path = "path",
   protected = "protected",
   restrictTo = "restrictTo",
+  uploadFiles = "uploadFiles",
 }

@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken";
 import AppError from "../services/AppError";
 import { Controller } from "../services/Controllers";
 import { sendEmail } from "../services/sendEmail";
+import { HotelModel } from "../models/hotelModel";
 
 type MongooseModel<T extends Document> = Model<T, {}>;
 
@@ -31,6 +32,7 @@ export class AuthController<
   login(model: T) {
     const controller = this;
     return async function (req: Request, res: Response, next: NextFunction) {
+      console.log(req.body);
       const { email, password } = req.body;
 
       if (!email || !password)
@@ -52,8 +54,8 @@ export class AuthController<
       }
       const type = user.constructor.modelName;
       const token = controller.tokenize(user._id, type);
-
-      res.status(200).json({ status: "success", user, token });
+      const hotel = await HotelModel.find({ hotelAccount: user._id });
+      res.status(200).json({ status: "success", user, token, hotel });
     };
   }
 
@@ -109,7 +111,6 @@ export class AuthController<
       // generate random token with crypto module
       const { resetToken, resetTokenHash } = user.createPasswordResetHash();
       // save token to user document
-      console.log(resetToken, resetTokenHash);
       user.passwordResetToken = resetTokenHash;
       const expireTime = process.env.RESET_PASSWORD_EXPIRE_TIME;
 
@@ -173,7 +174,7 @@ export class AuthController<
       if (!user) {
         return next(new AppError("User not found", 404));
       }
-      console.log(token, user.passwordResetToken);
+
       const isCorrectToken = user.compResetToken(
         token,
         user.passwordResetToken

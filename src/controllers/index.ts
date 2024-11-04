@@ -4,3 +4,6 @@ export * from "./BookingController";
 export * from "./AuthGuestController";
 export * from "./AuthHotelController";
 export * from "./RolesControllers";
+export * from "./SearchLocationProxyController";
+export * from "./HotelsReviewController";
+export * from "./CabinsReviewController";

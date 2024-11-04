@@ -1,8 +1,9 @@
-import { RolesModel } from "./../models/rolesModel";
+import { RolesModel } from "../models/rolesModel";
 import { controller } from "../decorators/controllerDecorator";
 import { del, get, patch, post } from "../decorators/routeHandlerDecorators";
 import { protect } from "../decorators/authDecorators";
 import { Controller } from "../services/Controllers";
+import { Router } from "express";
 
 @controller("/roles")
 export class RolesController extends Controller<typeof RolesModel> {

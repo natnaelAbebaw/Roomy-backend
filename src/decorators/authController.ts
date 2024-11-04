@@ -13,7 +13,6 @@ export function protectFunc(protect: string) {
   return async function (req: RequestM, res: Response, next: NextFunction) {
     try {
       const token = (req.headers.authorization as string)?.split(" ")[1];
-      console.log(token);
 
       if (!token) {
         return next(
@@ -38,7 +37,7 @@ export function protectFunc(protect: string) {
       if (protect !== accounts.all && decode.type !== protect) {
         return next(
           new AppError(
-            `You are not a valid candidate for this operation. This is reservered to: ${protect}. Please create a ${protect} to continue.`,
+            `You are not a valid candidate for this operation. This is reserved to: ${protect}. Please create a ${protect} to continue.`,
             401
           )
         );
@@ -58,10 +57,11 @@ export function protectFunc(protect: string) {
         );
       }
 
-      const passwordChageAt = +new Date(user.passwordChangeAt).getTime() / 1000;
+      const passwordChangeAt =
+        +new Date(user.passwordChangeAt).getTime() / 1000;
       const tokenIssuedAt = +new Date(decode.iat).getTime();
 
-      if (passwordChageAt > tokenIssuedAt) {
+      if (passwordChangeAt > tokenIssuedAt) {
         return next(
           new AppError(
             "You have changed your password recently. Please log in to continue.",

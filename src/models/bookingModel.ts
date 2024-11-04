@@ -56,22 +56,32 @@ const bookingSchema = new mongoose.Schema<Booking>(
     },
     status: {
       type: String,
-      enum: ["checkedin", "checkedout", "unconfirmed", "cancelled"],
+      enum: ["checkedin", "checkedout", "unconfirmed"],
     },
     hasBreakfast: {
       type: Boolean,
     },
     paymentStatus: {
       type: String,
-      enum: ["pending", "completed", "canceled"],
+      enum: ["pending", "paid"],
       default: "pending",
     },
   },
-  { timestamps: true }
+  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
 bookingSchema.virtual("numNights").get(function (this: Booking) {
   return differenceInDays(this.checkOutDate as any, this.checkInDate as any);
+});
+
+bookingSchema.pre(/^find/, function (this: any) {
+  this.populate({
+    path: "cabin",
+    select: "name",
+  }).populate({
+    path: "guest",
+    select: "fullName email nationalID nationality",
+  });
 });
 
 export const BookingModel = mongoose.model("Booking", bookingSchema);
