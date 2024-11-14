@@ -14,6 +14,8 @@ import AppError from "./services/AppError";
 import { globalErrorHandler } from "./services/globalErrorHandler";
 import { routers } from "./decorators/Routers";
 import cors from "cors";
+import { StripeWebhook } from "./services/utils";
+import bodyParser from "body-parser";
 
 const App: Express = express();
 
@@ -23,7 +25,14 @@ App.use(cors());
 App.use(morgan("dev"));
 App.use(express.json());
 App.use(express.urlencoded({ extended: true }));
+
 App.use(`${url}/uploads`, express.static("uploads"));
+
+App.post(
+  "/webhook/stripe",
+  bodyParser.raw({ type: "application/json" }),
+  StripeWebhook()
+);
 
 App.use(url, routers[HotelsController.name]);
 App.use(url, routers[CabinController.name]);

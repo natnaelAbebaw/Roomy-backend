@@ -482,45 +482,6 @@ export class HotelsController extends Controller<typeof HotelModel> {
     };
   }
 
-  // @post("/webhook")
-  // StripeWebhook() {
-  //   return async function (req: Request, res: Response, next: NextFunction) {
-  //     const sig = req.headers["stripe-signature"];
-
-  //     let event;
-
-  //     try {
-  //       // Verify the webhook signature
-  //       // event = stripe.webhooks.constructEvent(req.body, sig!, endpointSecret);
-  //     } catch (err) {
-  //       console.log("Webhook signature verification failed", err);
-  //       return res.status(400).send(`Webhook Error: ${err.message}`);
-  //     }
-
-  //     // Handle the event based on the type
-  //     switch (event.type) {
-  //       case "payment_intent.succeeded":
-  //         const paymentIntent = event.data.object; // Contains a PaymentIntent object
-  //         console.log("PaymentIntent was successful:", paymentIntent);
-  //         // Update payment status in your database, send confirmation to the user, etc.
-  //         break;
-
-  //       case "payment_intent.payment_failed":
-  //         const paymentFailed = event.data.object;
-  //         console.log("Payment failed:", paymentFailed);
-  //         // Update payment status in your database or notify the user
-  //         break;
-
-  //       // Handle other event types as necessary
-  //       default:
-  //         console.log(`Unhandled event type: ${event.type}`);
-  //     }
-
-  //     // Acknowledge receipt of the event
-  //     res.status(200).send("Event received");
-  //   };
-  // }
-
   @del("/:id")
   deleteHotel() {
     return this.delete(HotelModel);

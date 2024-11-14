@@ -1,5 +1,9 @@
 import bcrypt from "bcrypt";
 import crypto from "crypto";
+import { NextFunction, Request, Response } from "express";
+import Stripe from "stripe";
+import { BookingModel } from "../models/bookingModel";
+import AppError from "./AppError";
 
 export async function compPasswords(
   candidatePassword: string,
@@ -35,4 +39,46 @@ export function compResetToken(
     .update(candidateRestToken)
     .digest("hex");
   return restTokenHash === candidateRestTokenHash;
+}
+
+export function StripeWebhook() {
+  return async function (req: Request, res: Response, next: NextFunction) {
+    const sig = req.headers["stripe-signature"];
+    const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET as string;
+    let event;
+
+    try {
+      event = Stripe.webhooks.constructEvent(req.body, sig!, webhookSecret);
+    } catch (err) {
+      console.log("Webhook signature verification failed", err);
+      return res.status(400).send(`Webhook Error: ${err}`);
+    }
+
+    switch (event.type) {
+      case "payment_intent.succeeded":
+        const paymentIntent = event.data.object;
+        const bookingId = paymentIntent.metadata.bookingId;
+
+        const booking = await BookingModel.findById(bookingId);
+
+        if (!booking) return next(new AppError("Booking not found", 404));
+
+        booking.paymentStatus = "paid";
+        await booking.save();
+
+        break;
+
+      case "payment_intent.payment_failed":
+        const paymentFailed = event.data.object;
+        console.log("Payment failed:", paymentFailed);
+        break;
+
+      default:
+        console.log(`Unhandled event type: ${event.type}`);
+    }
+
+    res.status(200).send({
+      status: "success",
+    });
+  };
 }

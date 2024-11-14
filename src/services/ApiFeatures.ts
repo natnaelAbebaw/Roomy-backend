@@ -49,7 +49,7 @@ export class ApiFeatures {
   async applyPagnation() {
     if (this.body.limit == 0) return;
     const page = this.body.page ? +this.body.page : 1;
-    const limit = this.body.limit ? +this.body.limit : 3000;
+    const limit = this.body.limit ? +this.body.limit : 20;
     const skip = (page - 1) * limit;
 
     this.query = this.query.skip(skip).limit(limit);

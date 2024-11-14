@@ -12,9 +12,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.compResetToken = exports.createPasswordResetHash = exports.hashPassword = exports.compPasswords = void 0;
+exports.StripeWebhook = exports.compResetToken = exports.createPasswordResetHash = exports.hashPassword = exports.compPasswords = void 0;
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const crypto_1 = __importDefault(require("crypto"));
+const stripe_1 = __importDefault(require("stripe"));
+const bookingModel_1 = require("../models/bookingModel");
+const AppError_1 = __importDefault(require("./AppError"));
 function compPasswords(candidatePassword, userPassword) {
     return __awaiter(this, void 0, void 0, function* () {
         return yield bcrypt_1.default.compare(candidatePassword, userPassword);
@@ -49,3 +52,40 @@ function compResetToken(candidateRestToken, restTokenHash) {
     return restTokenHash === candidateRestTokenHash;
 }
 exports.compResetToken = compResetToken;
+function StripeWebhook() {
+    return function (req, res, next) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const sig = req.headers["stripe-signature"];
+            const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
+            let event;
+            try {
+                event = stripe_1.default.webhooks.constructEvent(req.body, sig, webhookSecret);
+            }
+            catch (err) {
+                console.log("Webhook signature verification failed", err);
+                return res.status(400).send(`Webhook Error: ${err}`);
+            }
+            switch (event.type) {
+                case "payment_intent.succeeded":
+                    const paymentIntent = event.data.object;
+                    const bookingId = paymentIntent.metadata.bookingId;
+                    const booking = yield bookingModel_1.BookingModel.findById(bookingId);
+                    if (!booking)
+                        return next(new AppError_1.default("Booking not found", 404));
+                    booking.paymentStatus = "paid";
+                    yield booking.save();
+                    break;
+                case "payment_intent.payment_failed":
+                    const paymentFailed = event.data.object;
+                    console.log("Payment failed:", paymentFailed);
+                    break;
+                default:
+                    console.log(`Unhandled event type: ${event.type}`);
+            }
+            res.status(200).send({
+                status: "success",
+            });
+        });
+    };
+}
+exports.StripeWebhook = StripeWebhook;
