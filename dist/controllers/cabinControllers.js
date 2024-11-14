@@ -31,11 +31,11 @@ const CabinsReviewController_1 = require("./CabinsReviewController");
 const UploadFilesDecorator_1 = require("../decorators/UploadFilesDecorator");
 let CabinController = class CabinController extends Controllers_1.Controller {
     getCabinAll() {
-        const CabinController = this;
+        const cabinController = this;
         return function (req, res, next) {
             return __awaiter(this, void 0, void 0, function* () {
                 req.query.hotel = req.params.hotelsId;
-                CabinController.getAll(cabinModel_1.CabinModel, req, res, next);
+                cabinController.getAll(cabinModel_1.CabinModel, req, res, next);
             });
         };
     }
@@ -83,7 +83,7 @@ let CabinController = class CabinController extends Controllers_1.Controller {
     }
     updateCabin() {
         // return this.update(CabinModel);
-        const CabinController = this;
+        const cabinController = this;
         return function (req, res, next) {
             return __awaiter(this, void 0, void 0, function* () {
                 var _a, _b;
@@ -101,7 +101,7 @@ let CabinController = class CabinController extends Controllers_1.Controller {
                         ? req.body.bedConfigurations.split(",")
                         : req.body.bedConfigurations || [];
                 console.log(req.body);
-                CabinController.update(cabinModel_1.CabinModel, req, res, next);
+                cabinController.update(cabinModel_1.CabinModel, req, res, next);
             });
         };
     }

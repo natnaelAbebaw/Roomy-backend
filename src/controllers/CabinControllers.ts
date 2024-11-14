@@ -21,10 +21,10 @@ interface MulterRequest extends Request {
 export class CabinController extends Controller<typeof CabinModel> {
   @get()
   getCabinAll() {
-    const CabinController = this;
+    const cabinController = this;
     return async function (req: Request, res: Response, next: NextFunction) {
       req.query.hotel = req.params.hotelsId;
-      CabinController.getAll(CabinModel, req, res, next);
+      cabinController.getAll(CabinModel, req, res, next);
     };
   }
 
@@ -85,7 +85,7 @@ export class CabinController extends Controller<typeof CabinModel> {
   @patch("/:id")
   updateCabin() {
     // return this.update(CabinModel);
-    const CabinController = this;
+    const cabinController = this;
     return async function (
       req: MulterRequest,
       res: Response,
@@ -109,7 +109,7 @@ export class CabinController extends Controller<typeof CabinModel> {
           : req.body.bedConfigurations || [];
 
       console.log(req.body);
-      CabinController.update(CabinModel, req, res, next);
+      cabinController.update(CabinModel, req, res, next);
     };
   }
 }
