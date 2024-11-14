@@ -23,16 +23,17 @@ const url = process.env.BASE_URL || "/api/v1";
 App.use(cors());
 
 App.use(morgan("dev"));
-App.use(express.json());
-App.use(express.urlencoded({ extended: true }));
 
 App.use(`${url}/uploads`, express.static("uploads"));
 
 App.post(
   "/webhook/stripe",
-  bodyParser.raw({ type: "application/json" }),
+  express.raw({ type: "application/json" }),
   StripeWebhook()
 );
+
+App.use(express.json());
+App.use(express.urlencoded({ extended: true }));
 
 App.use(url, routers[HotelsController.name]);
 App.use(url, routers[CabinController.name]);
