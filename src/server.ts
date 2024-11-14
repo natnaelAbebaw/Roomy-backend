@@ -13,7 +13,8 @@ import App from "./app";
 // import { bookingDataUploader } from "./sampleData/bookingDateUploader";
 // import { addMoreHotelhotel } from "./sampleData/addMoreHotels";
 // import { CabinUploaderForHotel } from "./sampleData/CabinUploaderForHotel";
-import { todaysBookingDataUploader } from "./sampleData/TodaysBookingDateUploader";
+// import { todaysBookingDataUploader } from "./sampleData/TodaysBookingDateUploader";
+// import { HotelModel } from "./models/hotelModel";
 
 dotenv.config();
 const port = process.env.PORT || 8000;
@@ -34,7 +35,7 @@ db.then(() => {
   // hotelRewiewUploader();
   // cabinDataUploader();
   // guestDataUploader();
-  // CabinUploaderForHotel("6617a3dac51520bf4181ba50");
+  // CabinUploaderForHotel("672bb69334c2f5fe23399a1b");
   // todaysBookingDataUploader();
 });
 

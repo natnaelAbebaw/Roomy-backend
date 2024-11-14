@@ -46,6 +46,7 @@ export class Controller<T extends MongooseModel<any>> {
       res.status(200).json({
         status: "success",
         length: resourses.length,
+        // ids,
         totalItems,
         resourses,
       });
@@ -66,6 +67,7 @@ export class Controller<T extends MongooseModel<any>> {
       res.status(201).json({ status: "success", length: 1, resourse });
     };
   }
+
   _delete(model: T) {
     return async function (req: Request, res: Response, next: NextFunction) {
       const resourse = await model.findByIdAndDelete(req.params.id);

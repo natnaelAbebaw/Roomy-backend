@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response, Router } from "express";
+import { NextFunction, Request, Response } from "express";
 import stripe from "stripe";
 
 import { controller } from "../decorators/controllerDecorator";
@@ -395,6 +395,131 @@ export class HotelsController extends Controller<typeof HotelModel> {
       res.status(200).json({ status: "success", accountLink });
     };
   }
+
+  @get("/:id/createStripeAccount")
+  CreateStripeAccountForHotel() {
+    return async function (req: Request, res: Response, next: NextFunction) {
+      const id = req.params.id;
+      const hotel = await HotelModel.findById(id);
+
+      if (!hotel) return next(new AppError("Hotel not found", 404));
+
+      const stripeApi = new stripe(process.env.STRIPE_SECRET_KEY as string);
+
+      const account = await stripeApi.accounts.create({
+        type: "express",
+        // email: hotel.contacts.email,
+        capabilities: {
+          card_payments: {
+            requested: true,
+          },
+          transfers: {
+            requested: true,
+          },
+        },
+      });
+
+      const bankAccountToken = await stripeApi.tokens.create({
+        bank_account: {
+          country: "US",
+          currency: "usd",
+          routing_number: "110000000", // Stripe test routing number
+          account_number: "000123456789", // Stripe test account number
+          account_holder_name: "Test Account",
+          account_holder_type: "individual",
+        },
+      });
+
+      await stripeApi.accounts.createExternalAccount(account.id, {
+        external_account: bankAccountToken.id,
+      });
+
+      hotel.stripeAccountId = account.id;
+
+      await hotel.save();
+
+      res.status(201).json({ status: "success", length: 1, hotel, account });
+    };
+  }
+
+  @post("/:id/createPaymentIntent/:bookingId")
+  CreatePaymentIntent() {
+    return async function (req: Request, res: Response, next: NextFunction) {
+      const { bookingId } = req.params;
+      const hotelId = req.params.id;
+      const hotel = await HotelModel.findById(hotelId);
+
+      if (!hotel) return next(new AppError("Hotel not found", 404));
+
+      const booking = await BookingModel.findById(bookingId);
+
+      const guestId = booking?.guest._id;
+
+      if (!booking) return next(new AppError("Booking not found", 404));
+
+      const stripeApi = new stripe(process.env.STRIPE_SECRET_KEY as string);
+
+      const paymentIntent = await stripeApi.paymentIntents.create({
+        amount: Math.round(booking?.totalPrice * 100 * 0.9),
+        currency: "usd",
+        payment_method_types: ["card"],
+        application_fee_amount: Math.round(booking?.totalPrice * 0.1 * 100),
+        transfer_data: {
+          destination: hotel.stripeAccountId,
+        },
+        metadata: {
+          bookingId: booking.id,
+          hotelId: hotel.id,
+          guestId,
+        },
+      });
+
+      res.status(201).json({
+        status: "success",
+        length: 1,
+        resource: { clientSecret: paymentIntent.client_secret },
+      });
+    };
+  }
+
+  // @post("/webhook")
+  // StripeWebhook() {
+  //   return async function (req: Request, res: Response, next: NextFunction) {
+  //     const sig = req.headers["stripe-signature"];
+
+  //     let event;
+
+  //     try {
+  //       // Verify the webhook signature
+  //       event = stripe.webhooks.constructEvent(req.body, sig!, endpointSecret);
+  //     } catch (err) {
+  //       console.log("Webhook signature verification failed", err);
+  //       return res.status(400).send(`Webhook Error: ${err.message}`);
+  //     }
+
+  //     // Handle the event based on the type
+  //     switch (event.type) {
+  //       case "payment_intent.succeeded":
+  //         const paymentIntent = event.data.object; // Contains a PaymentIntent object
+  //         console.log("PaymentIntent was successful:", paymentIntent);
+  //         // Update payment status in your database, send confirmation to the user, etc.
+  //         break;
+
+  //       case "payment_intent.payment_failed":
+  //         const paymentFailed = event.data.object;
+  //         console.log("Payment failed:", paymentFailed);
+  //         // Update payment status in your database or notify the user
+  //         break;
+
+  //       // Handle other event types as necessary
+  //       default:
+  //         console.log(`Unhandled event type: ${event.type}`);
+  //     }
+
+  //     // Acknowledge receipt of the event
+  //     res.status(200).send("Event received");
+  //   };
+  // }
 
   @del("/:id")
   deleteHotel() {

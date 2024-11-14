@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker/locale/en_US";
 import { HotelModel } from "../models/hotelModel";
 import { Cabin, CabinModel } from "../models/cabinModel";
-import { cabinId } from "./cabinId";
+import { cabinId } from "./CabinIDFor67_1b";
 import { GuestId } from "./guestId";
 
 export async function generateBookingData() {

@@ -10,9 +10,9 @@ export function CabinUploaderForHotel(hotelId?: string) {
     count: 200,
   });
 
-  CabinModel.deleteMany({}).then(() => {
-    CabinModel.create(fakeCabins)
-      .then(() => console.log("uploaded successfully"))
-      .catch((err) => console.error(err));
-  });
+  // CabinModel.deleteMany({}).then(() => {
+  CabinModel.create(fakeCabins)
+    .then(() => console.log("uploaded successfully"))
+    .catch((err) => console.error(err));
+  // });
 }

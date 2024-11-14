@@ -8,7 +8,7 @@ import { generateBookingData } from "./fakerBooking";
 export async function bookingDataUploader() {
   const fakeBooking = await Promise.all(
     faker.helpers.multiple(generateBookingData, {
-      count: 1000,
+      count: 20000,
     })
   );
 

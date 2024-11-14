@@ -8,7 +8,11 @@ export async function generateBookingData() {
   const cabin = faker.helpers.arrayElement(cabinId);
 
   const cabinOB: any = await CabinModel.find({ _id: cabin });
-  const data = faker.date.between("2024-05-12", "2024-10-28");
+  const data = faker.date.between(
+    new Date(new Date().setDate(new Date().getDate() - 90)).toISOString(),
+    new Date().toISOString()
+  );
+
   const data2 = new Date(data);
   const maxDays = 10;
 

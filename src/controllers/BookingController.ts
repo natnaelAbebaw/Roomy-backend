@@ -9,10 +9,10 @@ import { Controller } from "../services/Controllers";
 export class BookingController extends Controller<typeof BookingModel> {
   @get()
   getBookingAll() {
-    const CabinController = this;
+    const bookingController = this;
     return async function (req: Request, res: Response, next: NextFunction) {
       req.query.hotel = req.params.hotelsId;
-      CabinController.getAll(BookingModel, req, res, next);
+      bookingController.getAll(BookingModel, req, res, next);
     };
   }
 
@@ -115,7 +115,11 @@ export class BookingController extends Controller<typeof BookingModel> {
 
   @post()
   createBooking() {
-    return this.create(BookingModel);
+    const bookingController = this;
+    return async function (req: Request, res: Response, next: NextFunction) {
+      req.body.hotel = req.params.hotelsId;
+      bookingController.create(BookingModel, req, res, next);
+    };
   }
 
   @del("/:id")
@@ -130,7 +134,7 @@ export class BookingController extends Controller<typeof BookingModel> {
 
   @get("/q/:q")
   searchBookingByGuestName() {
-    const CabinController = this;
+    const bookingController = this;
     return async function (req: Request, res: Response, next: NextFunction) {
       const q = req.params.q;
       const matchConditions: any = {};

@@ -45,6 +45,7 @@ export class CabinController extends Controller<typeof CabinModel> {
       next: NextFunction
     ) {
       let cabinObject = req.body;
+      console.log(cabinObject);
       cabinObject.albumImages = cabinObject.albumImages
         ? cabinObject.albumImages
         : req.files?.map((file) => `/uploads/${file.filename}`);

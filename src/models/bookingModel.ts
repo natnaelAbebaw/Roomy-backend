@@ -3,9 +3,9 @@ import { Document } from "mongoose";
 import { differenceInDays } from "date-fns";
 
 export interface Booking extends Document {
-  guest: mongoose.Schema.Types.ObjectId;
-  cabin: mongoose.Schema.Types.ObjectId;
-  hotel: mongoose.Schema.Types.ObjectId;
+  guest: mongoose.Schema.Types.ObjectId | any;
+  cabin: mongoose.Schema.Types.ObjectId | any;
+  hotel: mongoose.Schema.Types.ObjectId | any;
   checkInDate: Date;
   checkOutDate: Date;
   numNight: number;
