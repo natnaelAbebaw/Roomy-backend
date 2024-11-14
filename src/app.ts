@@ -20,17 +20,17 @@ import bodyParser from "body-parser";
 const App: Express = express();
 
 const url = process.env.BASE_URL || "/api/v1";
-App.use(cors());
-
-App.use(morgan("dev"));
-
-App.use(`${url}/uploads`, express.static("uploads"));
 
 App.post(
   "/webhook/stripe",
   express.raw({ type: "application/json" }),
   StripeWebhook()
 );
+App.use(cors());
+
+App.use(morgan("dev"));
+
+App.use(`${url}/uploads`, express.static("uploads"));
 
 App.use(express.json());
 App.use(express.urlencoded({ extended: true }));

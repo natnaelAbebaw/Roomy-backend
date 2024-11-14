@@ -48,6 +48,9 @@ export function StripeWebhook() {
     let event;
 
     try {
+      console.log("sig", sig);
+      console.log("webhookSecret", webhookSecret);
+      if (!sig) return next(new AppError("Webhook signature not found", 400));
       event = Stripe.webhooks.constructEvent(req.body, sig!, webhookSecret);
     } catch (err) {
       console.log("Webhook signature verification failed", err);

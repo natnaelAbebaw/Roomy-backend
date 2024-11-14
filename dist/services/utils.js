@@ -59,6 +59,10 @@ function StripeWebhook() {
             const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
             let event;
             try {
+                console.log("sig", sig);
+                console.log("webhookSecret", webhookSecret);
+                if (!sig)
+                    return next(new AppError_1.default("Webhook signature not found", 400));
                 event = stripe_1.default.webhooks.constructEvent(req.body, sig, webhookSecret);
             }
             catch (err) {
