@@ -23,11 +23,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CabinModel = void 0;
+exports.CabinModel = exports.BedConfigurations = exports.amenities = exports.CabinTypes = exports.ViewTypeEnum = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
 var ViewTypeEnum;
 (function (ViewTypeEnum) {
-    ViewTypeEnum["NONE"] = "none";
+    ViewTypeEnum["NONE"] = "None";
     ViewTypeEnum["OCEAN"] = "Ocean View";
     ViewTypeEnum["MOUNTAIN"] = "Mountain View";
     ViewTypeEnum["CITY"] = "City View";
@@ -38,23 +38,47 @@ var ViewTypeEnum;
     ViewTypeEnum["WILDLIFE"] = "Wildlife View";
     ViewTypeEnum["PARTIAL"] = "Partial View";
     ViewTypeEnum["PARK"] = "Park View";
-})(ViewTypeEnum || (ViewTypeEnum = {}));
+    ViewTypeEnum["FOREST"] = "Forest View";
+})(ViewTypeEnum || (exports.ViewTypeEnum = ViewTypeEnum = {}));
 var CabinTypes;
 (function (CabinTypes) {
-    CabinTypes["DeluxeSuite"] = "Deluxe Suite";
-    CabinTypes["FamilyCabin"] = "Family Cabin";
-    CabinTypes["HoneymoonSuite"] = "Honeymoon Suite";
-    CabinTypes["LogCabin"] = "Log Cabin";
-    CabinTypes["CityLoft"] = "City Loft";
-    CabinTypes["SpaRetreat"] = "Spa Retreat";
-    CabinTypes["LuxuryPenthouse"] = "Luxury Penthouse";
-    CabinTypes["BeachfrontCottage"] = "Beachfront Cottage";
-    CabinTypes["MountainLodge"] = "Mountain Lodge";
-    CabinTypes["GreenSuite"] = "Green Suite";
-    CabinTypes["Standard"] = "Standard";
-    CabinTypes["Deluxe"] = "deluxe";
-    CabinTypes["Suite"] = "suite";
-})(CabinTypes || (CabinTypes = {}));
+    CabinTypes["singleBed"] = "Single Bed";
+    CabinTypes["doubleBed"] = "Double Bed";
+    CabinTypes["twinBed"] = "Twin Bed";
+    CabinTypes["tripleBed"] = "Triple Bed";
+    CabinTypes["quadBed"] = "Quad Bed";
+    CabinTypes["queenBed"] = "Queen Bed";
+    CabinTypes["kingBed"] = "King Bed";
+    CabinTypes["suite"] = "Suite";
+    CabinTypes["studio"] = "Studio";
+})(CabinTypes || (exports.CabinTypes = CabinTypes = {}));
+var amenities;
+(function (amenities) {
+    amenities["Bed"] = "Bed";
+    amenities["WiFi"] = "WiFi";
+    amenities["AirConditioning"] = "Air Conditioning";
+    amenities["Television"] = "Television";
+    amenities["MiniFridge"] = "Mini Fridge";
+    amenities["CoffeeTeaMaker"] = "Coffee/Tea Maker";
+    amenities["RoomService"] = "Room Service";
+    amenities["DeskAndChair"] = "Desk and Chair";
+    amenities["Telephone"] = "Telephone";
+    amenities["Wardrobe"] = "Wardrobe/Closet";
+    amenities["Safe"] = "Safe";
+    amenities["IronAndIroningBoard"] = "Iron and Ironing Board";
+    amenities["Hairdryer"] = "Hairdryer";
+    amenities["PrivateBathroom"] = "Private Bathroom";
+    amenities["Toiletries"] = "Toiletries";
+    amenities["TowelsAndBathrobe"] = "Towels and Bathrobe";
+    amenities["Slippers"] = "Slippers";
+    amenities["BlackoutCurtains"] = "Blackout Curtains";
+    amenities["SoundproofWindows"] = "Soundproof Windows";
+    amenities["Balcony"] = "Balcony or Window View";
+    amenities["LaundryService"] = "Laundry Service";
+    amenities["DailyHousekeeping"] = "Daily Housekeeping";
+    amenities["AlarmClock"] = "Alarm Clock";
+    amenities["USBChargingPorts"] = "USB Charging Ports";
+})(amenities || (exports.amenities = amenities = {}));
 var BedConfigurations;
 (function (BedConfigurations) {
     BedConfigurations["KingBed"] = "King Bed";
@@ -63,21 +87,23 @@ var BedConfigurations;
     BedConfigurations["TwinBeds"] = "Twin Beds";
     BedConfigurations["BunkBeds"] = "Bunk Beds";
     BedConfigurations["Single"] = "Single Bed";
-})(BedConfigurations || (BedConfigurations = {}));
+})(BedConfigurations || (exports.BedConfigurations = BedConfigurations = {}));
 const cabinSchema = new mongoose_1.Schema({
-    cabinName: {
+    name: {
         type: String,
+        index: true,
         required: [true, "This field is required"],
-        unique: true,
     },
     cabinType: {
         type: String,
-        required: [true, "This field is required"],
-        default: CabinTypes.Standard,
         enum: Object.values(CabinTypes),
+        required: [true, "This field is required"],
     },
-    images: { type: [String], required: [true, "This field is required"] },
-    floor: { type: String, required: [true, "This field is required"] },
+    albumImages: { type: [String], default: [] },
+    mainImage: {
+        type: String,
+    },
+    floor: { type: Number, required: [true, "This field is required"] },
     maxCapacity: {
         type: Number,
         required: [true, "This field is required"],
@@ -97,13 +123,14 @@ const cabinSchema = new mongoose_1.Schema({
             message: "discount must be less than reqular price",
         },
     },
-    availability: {
-        type: Boolean,
-        required: [true, "This field is required"],
-        default: true,
-    },
     amenities: {
-        type: [String],
+        type: [
+            {
+                type: String,
+                enum: Object.values(amenities),
+            },
+        ],
+        default: [],
     },
     bedConfigurations: {
         type: [
@@ -114,17 +141,24 @@ const cabinSchema = new mongoose_1.Schema({
         ],
         default: [],
     },
+    numBeds: {
+        type: Number,
+        default: 1,
+        required: [true, "This field is required"],
+    },
     description: {
         type: String,
     },
     viewType: {
         type: String,
         enum: ViewTypeEnum,
+        default: ViewTypeEnum.NONE,
     },
-    hotelId: {
+    hotel: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: "Hotel",
         required: true,
     },
-});
+}, { timestamps: true });
+cabinSchema.index({ name: "text" });
 exports.CabinModel = mongoose_1.default.model("Cabin", cabinSchema);

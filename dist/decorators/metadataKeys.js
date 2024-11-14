@@ -6,4 +6,7 @@ var metadataKeys;
     metadataKeys["method"] = "method";
     metadataKeys["middleware"] = "middleware";
     metadataKeys["path"] = "path";
+    metadataKeys["protected"] = "protected";
+    metadataKeys["restrictTo"] = "restrictTo";
+    metadataKeys["uploadFiles"] = "uploadFiles";
 })(metadataKeys || (exports.metadataKeys = metadataKeys = {}));

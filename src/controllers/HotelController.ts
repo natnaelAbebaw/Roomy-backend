@@ -491,7 +491,7 @@ export class HotelsController extends Controller<typeof HotelModel> {
 
   //     try {
   //       // Verify the webhook signature
-  //       event = stripe.webhooks.constructEvent(req.body, sig!, endpointSecret);
+  //       // event = stripe.webhooks.constructEvent(req.body, sig!, endpointSecret);
   //     } catch (err) {
   //       console.log("Webhook signature verification failed", err);
   //       return res.status(400).send(`Webhook Error: ${err.message}`);
