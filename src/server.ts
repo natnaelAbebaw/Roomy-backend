@@ -13,7 +13,7 @@ import App from "./app";
 // import { bookingDataUploader } from "./sampleData/bookingDateUploader";
 // import { addMoreHotelhotel } from "./sampleData/addMoreHotels";
 // import { CabinUploaderForHotel } from "./sampleData/CabinUploaderForHotel";
-// import { todaysBookingDataUploader } from "./sampleData/TodaysBookingDateUploader";
+import { todaysBookingDataUploader } from "./sampleData/TodaysBookingDateUploader";
 // import { HotelModel } from "./models/hotelModel";
 
 dotenv.config();

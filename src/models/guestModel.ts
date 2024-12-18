@@ -32,7 +32,7 @@ export interface Guest extends Document {
 
 const guestSchema = new mongoose.Schema<Guest>(
   {
-    fullName: { type: String, required: true },
+    fullName: { type: String },
     userName: { type: String, required: true },
     email: {
       type: String,
@@ -56,8 +56,8 @@ const guestSchema = new mongoose.Schema<Guest>(
         message: "passwords are not the same",
       },
     },
-    nationality: { type: String, required: true },
-    nationalID: { type: String, required: true },
+    nationality: { type: String },
+    nationalID: { type: String },
     avatarUrl: { type: String },
     passwordChangeAt: {
       type: Date,

@@ -12,7 +12,7 @@ export class AuthGuestController extends AuthController<typeof GuestModel> {
     return this.signup(GuestModel);
   }
 
-  @get("/login")
+  @post("/login")
   loginGuest() {
     return this.login(GuestModel);
   }
