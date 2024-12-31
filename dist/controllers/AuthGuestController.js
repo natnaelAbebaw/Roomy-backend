@@ -49,7 +49,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], AuthGuestController.prototype, "signupGuest", null);
 __decorate([
-    (0, routeHandlerDecorators_1.get)("/login"),
+    (0, routeHandlerDecorators_1.post)("/login"),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)

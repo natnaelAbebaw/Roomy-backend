@@ -8,7 +8,7 @@ const mongoose_1 = __importDefault(require("mongoose"));
 const validator_1 = __importDefault(require("validator"));
 const utils_1 = require("../services/utils");
 const guestSchema = new mongoose_1.default.Schema({
-    fullName: { type: String, required: true },
+    fullName: { type: String },
     userName: { type: String, required: true },
     email: {
         type: String,
@@ -32,8 +32,8 @@ const guestSchema = new mongoose_1.default.Schema({
             message: "passwords are not the same",
         },
     },
-    nationality: { type: String, required: true },
-    nationalID: { type: String, required: true },
+    nationality: { type: String },
+    nationalID: { type: String },
     avatarUrl: { type: String },
     passwordChangeAt: {
         type: Date,
